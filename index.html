@@ -1,0 +1,3864 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Tes Kandidat Kreatif - Profil, IQ, DISC & Psikotes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Tambahkan library jsPDF untuk export PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px 25px;
+            min-width: 150px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-box .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* MAIN CONTENT LAYOUT */
+        .main-content {
+            display: flex;
+            min-height: 800px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar h3 i {
+            color: var(--success);
+        }
+        
+        .candidate-profile {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        
+        .profile-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--success);
+        }
+        
+        .profile-field {
+            margin-bottom: 12px;
+        }
+        
+        .profile-field label {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .profile-field input, .profile-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+        
+        .profile-field input:focus, .profile-field select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.5);
+        }
+        
+        .position-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .position-option {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+        }
+        
+        .position-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .position-option.selected {
+            background: rgba(76, 201, 240, 0.3);
+            border-color: var(--success);
+        }
+        
+        .nav-menu {
+            margin-top: 20px;
+            flex-grow: 1;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+        
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            opacity: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item.completed {
+            border-left: 4px solid var(--success);
+        }
+        
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .nav-text {
+            flex-grow: 1;
+        }
+        
+        .nav-text .title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .nav-text .desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .nav-status {
+            font-size: 0.8rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+        
+        .content-area {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+        
+        .test-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .test-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            max-width: 800px;
+        }
+        
+        /* TEST COMMON STYLES */
+        .test-instructions {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .test-instructions h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instruction-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .instruction-item i {
+            color: var(--success);
+            margin-top: 3px;
+        }
+        
+        .questions-container {
+            margin-top: 30px;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .question-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .question-card.answered {
+            border-color: var(--success);
+        }
+        
+        .question-header {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+        
+        /* IQ TEST SPECIFIC */
+        .iq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .iq-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: var(--light);
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .iq-option:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .iq-option.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .option-letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .iq-option.selected .option-letter {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* DISC TEST SPECIFIC */
+        .disc-options-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .disc-options-table th {
+            background-color: #f0f7ff;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .disc-options-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        
+        .option-text {
+            padding-right: 15px;
+            line-height: 1.5;
+        }
+        
+        .disc-checkbox-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .disc-checkbox-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .checkbox-label {
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .most-checkbox {
+            accent-color: #2ecc71;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .least-checkbox {
+            accent-color: #e74c3c;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        /* PSIKOTES SPECIFIC */
+        .psikotes-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .psikotes-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: var(--light);
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .psikotes-option:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .psikotes-option.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .psikotes-option input[type="radio"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        /* TEST CONTROLS */
+        .test-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+        }
+        
+        /* RESULTS SECTION */
+        .results-section {
+            display: none;
+            padding: 30px;
+        }
+        
+        .results-section.active {
+            display: block;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .results-header h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .candidate-results-profile {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .profile-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-info p {
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .profile-position {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .comprehensive-results {
+            margin-bottom: 50px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border-top: 5px solid var(--primary);
+        }
+        
+        .result-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chart-container {
+            height: 250px;
+            margin-top: 20px;
+        }
+        
+        .result-details {
+            margin-top: 20px;
+        }
+        
+        .skill-meter {
+            margin: 20px 0;
+        }
+        
+        .skill-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--primary));
+            border-radius: 5px;
+            width: 0%;
+            transition: width 1.5s ease;
+        }
+        
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .recommendation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--success);
+        }
+        
+        .recommendation-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .recommendation-card ul {
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+        
+        .recommendation-card li {
+            margin-bottom: 10px;
+        }
+        
+        .final-recommendation {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            border-left: 5px solid #ff9800;
+        }
+        
+        .final-recommendation h3 {
+            color: #f57c00;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--light);
+            border-top: 1px solid var(--light-gray);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* PROGRESS INDICATORS */
+        .progress-container {
+            margin: 20px 0;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--primary));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .modal-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            background: var(--light-gray);
+        }
+        
+        /* QUICK RESULTS PANEL */
+        .quick-results-panel {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .test-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .summary-card.completed {
+            border-left: 4px solid var(--success);
+        }
+        
+        .summary-card.incomplete {
+            border-left: 4px solid var(--accent);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .content-area {
+                max-height: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .stat-box {
+                min-width: 120px;
+                padding: 12px 15px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .disc-options-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1><i class="fas fa-user-tie"></i> Portal Tes Kandidat Kreatif</h1>
+            <p>Assesmen Komprehensif untuk Social Media Specialist, Designer, Video Editor, Videografer, Ads, Marketing Communication, dan Project Manager/Art Director</p>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="number">3</span>
+                    <span class="label">Jenis Tes</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">90</span>
+                    <span class="label">Total Soal</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">7</span>
+                    <span class="label">Posisi Tersedia</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number" id="completion-status">0%</span>
+                    <span class="label">Progress Tes</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- SIDEBAR NAVIGATION -->
+            <div class="sidebar">
+                <h3><i class="fas fa-user-circle"></i> Profil Kandidat</h3>
+                
+                <div class="candidate-profile">
+                    <div class="profile-info">
+                        <h4>Data Pribadi</h4>
+                        <div class="profile-field">
+                            <label for="candidateName">Nama Lengkap</label>
+                            <input type="text" id="candidateName" placeholder="Masukkan nama lengkap">
+                        </div>
+                        <div class="profile-field">
+                            <label for="candidateEmail">Email</label>
+                            <input type="email" id="candidateEmail" placeholder="email@contoh.com">
+                        </div>
+                        <div class="profile-field">
+                            <label for="candidatePhone">No. Telepon</label>
+                            <input type="text" id="candidatePhone" placeholder="08xxxxxxxxxx">
+                        </div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h4>Posisi yang Dilamar</h4>
+                        <div class="profile-field">
+                            <label>Pilih posisi:</label>
+                            <div class="position-options" id="positionOptions">
+                                <!-- Options will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-tasks"></i> Navigasi Tes</h3>
+                <div class="nav-menu">
+                    <div class="nav-item active" data-section="profile">
+                        <div class="nav-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="nav-text">
+                            <div class="title">Profil & Instruksi</div>
+                            <div class="desc">Lengkapi data dan baca petunjuk</div>
+                        </div>
+                        <div class="nav-status">Aktif</div>
+                    </div>
+                    
+                    <div class="nav-item" data-section="iq">
+                        <div class="nav-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="nav-text">
+                            <div class="title">Tes IQ (30 soal)</div>
+                            <div class="desc">Penalaran verbal, numerik, spasial</div>
+                        </div>
+                        <div class="nav-status">Belum</div>
+                    </div>
+                    
+                    <div class="nav-item" data-section="disc">
+                        <div class="nav-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="nav-text">
+                            <div class="title">Tes DISC (30 soal)</div>
+                            <div class="desc">Kepribadian & kecenderungan kerja</div>
+                        </div>
+                        <div class="nav-status">Belum</div>
+                    </div>
+                    
+                    <div class="nav-item" data-section="psikotes">
+                        <div class="nav-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="nav-text">
+                            <div class="title">Tes Psikotes (30 soal)</div>
+                            <div class="desc">Kesesuaian dengan industri kreatif</div>
+                        </div>
+                        <div class="nav-status">Belum</div>
+                    </div>
+                    
+                    <div class="nav-item" data-section="results">
+                        <div class="nav-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="nav-text">
+                            <div class="title">Hasil & Rekomendasi</div>
+                            <div class="desc">Analisis lengkap & rekomendasi</div>
+                        </div>
+                        <div class="nav-status">Terkunci</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- PROFILE SECTION -->
+                <div class="test-section active" id="profile-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-id-card"></i> Profil Kandidat & Instruksi Umum</h2>
+                        <p>Lengkapi data diri Anda dan pahami petunjuk pengerjaan tes sebelum memulai.</p>
+                    </div>
+                    
+                    <div class="test-instructions">
+                        <h3><i class="fas fa-info-circle"></i> Instruksi Pengerjaan Tes</h3>
+                        <p>Portal ini terdiri dari 3 jenis tes dengan total 90 soal. Pastikan Anda mengerjakan dengan jujur dan teliti.</p>
+                        
+                        <div class="instruction-list">
+                            <div class="instruction-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Perhatikan Waktu</strong>
+                                    <p>Tidak ada batas waktu ketat, namun kerjakan dengan tempo yang wajar. Rata-rata pengerjaan seluruh tes adalah 60-90 menit.</p>
+                                </div>
+                            </div>
+                            <div class="instruction-item">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <strong>Jawab Semua Soal</strong>
+                                    <p>Pastikan semua soal terjawab sebelum beralih ke tes berikutnya atau melihat hasil akhir.</p>
+                                </div>
+                            </div>
+                            <div class="instruction-item">
+                                <i class="fas fa-user-check"></i>
+                                <div>
+                                    <strong>Jawab dengan Jujur</strong>
+                                    <p>Jawab sesuai dengan diri Anda yang sebenarnya, bukan jawaban yang Anda anggap "diinginkan".</p>
+                                </div>
+                            </div>
+                            <div class="instruction-item">
+                                <i class="fas fa-laptop"></i>
+                                <div>
+                                    <strong>Lingkungan yang Nyaman</strong>
+                                    <p>Cari tempat tenang dan nyaman untuk mengerjakan tes agar hasil lebih akurat.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-results-panel">
+                        <h3><i class="fas fa-eye"></i> Lihat Hasil Sementara</h3>
+                        <p>Anda dapat melihat progress dan hasil per tes sebelum menyelesaikan semua tes:</p>
+                        
+                        <div class="test-summary" id="test-summary">
+                            <!-- Akan diisi oleh JavaScript -->
+                        </div>
+                        
+                        <div class="test-controls">
+                            <button class="btn btn-secondary" id="view-interim-results">
+                                <i class="fas fa-chart-bar"></i> Lihat Hasil Sementara
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="test-controls">
+                        <button class="btn btn-secondary" id="saveProfileBtn">
+                            <i class="fas fa-save"></i> Simpan Profil
+                        </button>
+                        <button class="btn btn-primary" id="startTestBtn">
+                            <i class="fas fa-play"></i> Mulai Tes IQ
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- IQ TEST SECTION -->
+                <div class="test-section" id="iq-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-brain"></i> Tes IQ - Penalaran Kognitif</h2>
+                        <p>Ukur kemampuan penalaran verbal, numerik, dan spasial Anda dengan 30 soal terstandar.</p>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span>Progress: <span id="iq-progress-count">0</span>/30 soal</span>
+                            <span id="iq-progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="iq-progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="test-instructions">
+                        <h3><i class="fas fa-lightbulb"></i> Petunjuk Tes IQ</h3>
+                        <p>Pilih satu jawaban yang paling tepat untuk setiap soal. Tes ini mengukur kemampuan berpikir logis dan analitis Anda.</p>
+                    </div>
+                    
+                    <div class="questions-container" id="iq-questions">
+                        <!-- IQ questions will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <div class="test-controls">
+                        <button class="btn btn-secondary" id="prev-iq-btn">
+                            <i class="fas fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button class="btn btn-secondary" id="view-iq-results-btn">
+                            <i class="fas fa-chart-line"></i> Lihat Hasil IQ
+                        </button>
+                        <button class="btn btn-primary" id="next-iq-btn">
+                            Selanjutnya <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- DISC TEST SECTION -->
+                <div class="test-section" id="disc-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Tes DISC - Kepribadian & Kecenderungan Kerja</h2>
+                        <p>Identifikasi gaya kerja, motivasi, dan preferensi Anda dalam tim kreatif.</p>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span>Progress: <span id="disc-progress-count">0</span>/30 soal</span>
+                            <span id="disc-progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="disc-progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="test-instructions">
+                        <h3><i class="fas fa-user-friends"></i> Petunjuk Tes DISC</h3>
+                        <p>Untuk setiap pernyataan, pilih <strong>DUA</strong> jawaban: satu yang PALING sesuai dan satu yang PALING TIDAK sesuai dengan diri Anda.</p>
+                    </div>
+                    
+                    <div class="questions-container" id="disc-questions">
+                        <!-- DISC questions will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <div class="test-controls">
+                        <button class="btn btn-secondary" id="prev-disc-btn">
+                            <i class="fas fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button class="btn btn-secondary" id="view-disc-results-btn">
+                            <i class="fas fa-chart-line"></i> Lihat Hasil DISC
+                        </button>
+                        <button class="btn btn-primary" id="next-disc-btn">
+                            Selanjutnya <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- PSIKOTES SECTION -->
+                <div class="test-section" id="psikotes-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-bar"></i> Tes Psikotes - Kesesuaian Industri Kreatif</h2>
+                        <p>Ukur kecocokan Anda dengan tantangan dan dinamika pekerjaan di industri kreatif.</p>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span>Progress: <span id="psikotes-progress-count">0</span>/30 soal</span>
+                            <span id="psikotes-progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="psikotes-progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="test-instructions">
+                        <h3><i class="fas fa-palette"></i> Petunjuk Tes Psikotes</h3>
+                        <p>Pilih satu jawaban yang paling menggambarkan diri Anda. Tes ini mengukur aspek kepribadian yang relevan dengan pekerjaan kreatif.</p>
+                    </div>
+                    
+                    <div class="questions-container" id="psikotes-questions">
+                        <!-- Psikotes questions will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <div class="test-controls">
+                        <button class="btn btn-secondary" id="prev-psikotes-btn">
+                            <i class="fas fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button class="btn btn-secondary" id="view-psikotes-results-btn">
+                            <i class="fas fa-chart-line"></i> Lihat Hasil Psikotes
+                        </button>
+                        <button class="btn btn-success" id="finish-all-btn">
+                            <i class="fas fa-flag-checkered"></i> Selesaikan Semua Tes & Lihat Hasil
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- RESULTS SECTION -->
+                <div class="test-section" id="results-section">
+                    <div class="results-section active">
+                        <div class="results-header">
+                            <h2><i class="fas fa-chart-line"></i> Hasil Assesmen Komprehensif</h2>
+                            <p>Analisis lengkap berdasarkan performa Anda di ketiga tes</p>
+                        </div>
+                        
+                        <div class="candidate-results-profile">
+                            <div class="profile-header">
+                                <div class="profile-info">
+                                    <h3 id="result-name">-</h3>
+                                    <p id="result-email">-</p>
+                                    <p id="result-phone">-</p>
+                                </div>
+                                <div class="profile-position" id="result-position">-</div>
+                            </div>
+                            <p>Tanggal Tes: <span id="result-date">-</span></p>
+                        </div>
+                        
+                        <div class="comprehensive-results">
+                            <h3><i class="fas fa-chart-pie"></i> Ringkasan Hasil Tes</h3>
+                            <div class="results-grid">
+                                <div class="result-card">
+                                    <h3><i class="fas fa-brain"></i> Skor IQ</h3>
+                                    <div class="skill-meter">
+                                        <div class="skill-label">
+                                            <span>Skor IQ Anda</span>
+                                            <span id="iq-score-value">--</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-fill" id="iq-score-bar"></div>
+                                        </div>
+                                    </div>
+                                    <div id="iq-classification">--</div>
+                                    <div class="chart-container">
+                                        <canvas id="iq-chart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="result-card">
+                                    <h3><i class="fas fa-users"></i> Profil DISC</h3>
+                                    <div id="disc-primary-type">--</div>
+                                    <div class="chart-container">
+                                        <canvas id="disc-chart"></canvas>
+                                    </div>
+                                    <div class="result-details" id="disc-details"></div>
+                                </div>
+                                
+                                <div class="result-card">
+                                    <h3><i class="fas fa-palette"></i> Psikotes Kreatif</h3>
+                                    <div id="psikotes-summary">--</div>
+                                    <div class="chart-container">
+                                        <canvas id="psikotes-chart"></canvas>
+                                    </div>
+                                    <div class="result-details" id="psikotes-details"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendations-section">
+                            <h3><i class="fas fa-lightbulb"></i> Rekomendasi & Analisis</h3>
+                            <div class="recommendations-grid">
+                                <div class="recommendation-card">
+                                    <h4><i class="fas fa-star"></i> Kekuatan Utama</h4>
+                                    <div id="strengths-list"></div>
+                                </div>
+                                
+                                <div class="recommendation-card">
+                                    <h4><i class="fas fa-tools"></i> Area Pengembangan</h4>
+                                    <div id="development-areas"></div>
+                                </div>
+                                
+                                <div class="recommendation-card">
+                                    <h4><i class="fas fa-briefcase"></i> Kesesuaian Posisi</h4>
+                                    <div id="position-suitability"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="final-recommendation">
+                                <h3><i class="fas fa-clipboard-check"></i> Rekomendasi Final</h3>
+                                <div id="final-recommendation-text"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="test-controls">
+                            <button class="btn btn-secondary" id="back-to-tests-btn">
+                                <i class="fas fa-edit"></i> Perbaiki Jawaban
+                            </button>
+                            <button class="btn btn-primary" id="export-pdf-btn">
+                                <i class="fas fa-file-pdf"></i> Simpan sebagai PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>© 2023 Portal Tes Kandidat Kreatif. Sistem assesmen terintegrasi untuk industri kreatif.</p>
+            <p>Hasil ini memberikan gambaran tentang potensi kandidat dan rekomendasi pengembangan.</p>
+        </div>
+    </div>
+
+    <!-- MODAL UNTUK HASIL SEMENTARA -->
+    <div class="modal" id="interim-results-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-chart-pie"></i> Hasil Sementara Tes</h3>
+                <button class="close-modal" id="close-interim-modal">&times;</button>
+            </div>
+            <div id="interim-results-content">
+                <!-- Konten hasil sementara akan dimuat di sini -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL UNTUK HASIL DETAIL TES -->
+    <div class="modal" id="detailed-results-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="detailed-results-title"><i class="fas fa-chart-line"></i> Hasil Detail Tes</h3>
+                <button class="close-modal" id="close-detailed-modal">&times;</button>
+            </div>
+            <div id="detailed-results-content">
+                <!-- Konten hasil detail akan dimuat di sini -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===================== KONFIGURASI POSISI =====================
+        const POSITIONS = [
+            { id: 1, name: "Social Media Specialist", icon: "fas fa-hashtag", color: "#e74c3c" },
+            { id: 2, name: "Designer", icon: "fas fa-pencil-ruler", color: "#3498db" },
+            { id: 3, name: "Video Editor", icon: "fas fa-video", color: "#2ecc71" },
+            { id: 4, name: "Videografer", icon: "fas fa-camera", color: "#9b59b6" },
+            { id: 5, name: "Ads Specialist", icon: "fas fa-ad", color: "#f39c12" },
+            { id: 6, name: "Marketing Communication", icon: "fas fa-bullhorn", color: "#1abc9c" },
+            { id: 7, name: "Project Manager/Art Director", icon: "fas fa-tasks", color: "#34495e" }
+        ];
+
+        // ===================== STATE MANAGEMENT =====================
+        let currentSection = "profile";
+        let candidateData = {
+            name: "",
+            email: "",
+            phone: "",
+            position: null,
+            testDate: new Date().toLocaleDateString('id-ID', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            })
+        };
+        
+        // Data jawaban untuk masing-masing tes
+        let testAnswers = {
+            iq: Array(30).fill(null),
+            disc: Array(30).fill({ most: null, least: null }),
+            psikotes: Array(30).fill(null)
+        };
+        
+        // Skor hasil tes
+        let testResults = {
+            iq: { score: 0, classification: "", details: {} },
+            disc: { primary: "", scores: {}, details: {} },
+            psikotes: { scores: {}, summary: "" }
+        };
+
+        // ===================== INISIALISASI =====================
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePortal();
+            setupEventListeners();
+        });
+
+        function initializePortal() {
+            // Load position options
+            loadPositionOptions();
+            
+            // Set current date in profile
+            document.getElementById('candidateName').focus();
+            
+            // Load questions for each test
+            loadIQQuestions();
+            loadDISCQuestions();
+            loadPsikotesQuestions();
+            
+            // Update navigation status
+            updateNavigation();
+            
+            // Update progress overall
+            updateOverallProgress();
+        }
+
+        function loadPositionOptions() {
+            const container = document.getElementById('positionOptions');
+            container.innerHTML = '';
+            
+            POSITIONS.forEach(position => {
+                const option = document.createElement('div');
+                option.className = 'position-option';
+                option.textContent = position.name;
+                option.dataset.id = position.id;
+                
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.position-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Save selected position
+                    candidateData.position = {
+                        id: position.id,
+                        name: position.name,
+                        icon: position.icon,
+                        color: position.color
+                    };
+                });
+                
+                container.appendChild(option);
+            });
+        }
+
+        function setupEventListeners() {
+            // Navigation items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    if (section === "results") {
+                        // Only allow navigation to results if all tests are completed
+                        if (checkAllTestsCompleted()) {
+                            calculateAllResults();
+                            displayResults();
+                            switchSection(section);
+                        } else {
+                            alert("Silakan selesaikan semua tes terlebih dahulu sebelum melihat hasil.");
+                        }
+                    } else {
+                        switchSection(section);
+                    }
+                });
+            });
+            
+            // Profile buttons
+            document.getElementById('saveProfileBtn').addEventListener('click', saveProfile);
+            document.getElementById('startTestBtn').addEventListener('click', function() {
+                if (validateProfile()) {
+                    switchSection('iq');
+                }
+            });
+            
+            // IQ test buttons
+            document.getElementById('prev-iq-btn').addEventListener('click', function() {
+                switchSection('profile');
+            });
+            document.getElementById('next-iq-btn').addEventListener('click', function() {
+                if (checkTestCompletion('iq')) {
+                    switchSection('disc');
+                } else {
+                    alert("Silakan jawab semua soal IQ sebelum melanjutkan.");
+                }
+            });
+            
+            // DISC test buttons
+            document.getElementById('prev-disc-btn').addEventListener('click', function() {
+                switchSection('iq');
+            });
+            document.getElementById('next-disc-btn').addEventListener('click', function() {
+                if (checkTestCompletion('disc')) {
+                    switchSection('psikotes');
+                } else {
+                    alert("Silakan jawab semua soal DISC sebelum melanjutkan.");
+                }
+            });
+            
+            // Psikotes buttons
+            document.getElementById('prev-psikotes-btn').addEventListener('click', function() {
+                switchSection('disc');
+            });
+            document.getElementById('finish-all-btn').addEventListener('click', function() {
+                if (checkTestCompletion('psikotes')) {
+                    calculateAllResults();
+                    displayResults();
+                    switchSection('results');
+                } else {
+                    alert("Silakan jawab semua soal Psikotes sebelum melihat hasil.");
+                }
+            });
+            
+            // Results buttons
+            document.getElementById('back-to-tests-btn').addEventListener('click', function() {
+                switchSection('profile');
+            });
+            document.getElementById('export-pdf-btn').addEventListener('click', exportToPDF);
+            
+            // View results buttons
+            document.getElementById('view-interim-results').addEventListener('click', showInterimResults);
+            document.getElementById('view-iq-results-btn').addEventListener('click', function() {
+                showDetailedResults('iq');
+            });
+            document.getElementById('view-disc-results-btn').addEventListener('click', function() {
+                showDetailedResults('disc');
+            });
+            document.getElementById('view-psikotes-results-btn').addEventListener('click', function() {
+                showDetailedResults('psikotes');
+            });
+            
+            // Modal close buttons
+            document.getElementById('close-interim-modal').addEventListener('click', function() {
+                document.getElementById('interim-results-modal').classList.remove('active');
+            });
+            
+            document.getElementById('close-detailed-modal').addEventListener('click', function() {
+                document.getElementById('detailed-results-modal').classList.remove('active');
+            });
+            
+            // Close modal when clicking outside
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // ===================== PROFILE MANAGEMENT =====================
+        function validateProfile() {
+            const name = document.getElementById('candidateName').value.trim();
+            const email = document.getElementById('candidateEmail').value.trim();
+            const phone = document.getElementById('candidatePhone').value.trim();
+            
+            if (!name) {
+                alert("Silakan masukkan nama lengkap.");
+                document.getElementById('candidateName').focus();
+                return false;
+            }
+            
+            if (!email) {
+                alert("Silakan masukkan alamat email.");
+                document.getElementById('candidateEmail').focus();
+                return false;
+            }
+            
+            if (!phone) {
+                alert("Silakan masukkan nomor telepon.");
+                document.getElementById('candidatePhone').focus();
+                return false;
+            }
+            
+            if (!candidateData.position) {
+                alert("Silakan pilih posisi yang dilamar.");
+                return false;
+            }
+            
+            // Save profile data
+            candidateData.name = name;
+            candidateData.email = email;
+            candidateData.phone = phone;
+            
+            return true;
+        }
+
+        function saveProfile() {
+            if (validateProfile()) {
+                alert("Profil berhasil disimpan. Anda dapat melanjutkan ke tes.");
+            }
+        }
+
+        // ===================== SECTION NAVIGATION =====================
+        function switchSection(section) {
+            // Hide current section
+            document.querySelector(`.test-section.active`).classList.remove('active');
+            document.querySelector(`.nav-item.active`).classList.remove('active');
+            
+            // Update current section
+            currentSection = section;
+            
+            // Show new section
+            document.getElementById(`${section}-section`).classList.add('active');
+            document.querySelector(`.nav-item[data-section="${section}"]`).classList.add('active');
+            
+            // Scroll to top
+            document.querySelector('.content-area').scrollTop = 0;
+            
+            // Update navigation status
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            // Update status indicators based on test completion
+            const iqCompleted = checkTestCompletion('iq');
+            const discCompleted = checkTestCompletion('disc');
+            const psikotesCompleted = checkTestCompletion('psikotes');
+            const allCompleted = iqCompleted && discCompleted && psikotesCompleted;
+            
+            // Update progress overall
+            updateOverallProgress();
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const section = item.dataset.section;
+                const statusEl = item.querySelector('.nav-status');
+                
+                if (section === 'iq' && iqCompleted) {
+                    statusEl.textContent = "Selesai";
+                    item.classList.add('completed');
+                } else if (section === 'disc' && discCompleted) {
+                    statusEl.textContent = "Selesai";
+                    item.classList.add('completed');
+                } else if (section === 'psikotes' && psikotesCompleted) {
+                    statusEl.textContent = "Selesai";
+                    item.classList.add('completed');
+                } else if (section === 'results') {
+                    if (allCompleted) {
+                        statusEl.textContent = "Tersedia";
+                        item.style.opacity = "1";
+                    } else {
+                        statusEl.textContent = "Terkunci";
+                        item.style.opacity = "0.6";
+                    }
+                }
+            });
+        }
+
+        // ===================== PROGRESS MANAGEMENT =====================
+        function updateOverallProgress() {
+            const totalQuestions = 90;
+            let answeredCount = 0;
+            
+            // Hitung jawaban dari semua tes
+            answeredCount += testAnswers.iq.filter(answer => answer !== null).length;
+            answeredCount += testAnswers.disc.filter(answer => answer.most !== null && answer.least !== null).length;
+            answeredCount += testAnswers.psikotes.filter(answer => answer !== null).length;
+            
+            const percentage = Math.round((answeredCount / totalQuestions) * 100);
+            
+            // Update header status
+            document.getElementById('completion-status').textContent = `${percentage}%`;
+            
+            // Update test summary in profile section
+            updateTestSummary();
+        }
+
+        function updateTestSummary() {
+            const container = document.getElementById('test-summary');
+            const iqCompleted = checkTestCompletion('iq');
+            const discCompleted = checkTestCompletion('disc');
+            const psikotesCompleted = checkTestCompletion('psikotes');
+            
+            const iqAnswered = testAnswers.iq.filter(answer => answer !== null).length;
+            const discAnswered = testAnswers.disc.filter(answer => answer.most !== null && answer.least !== null).length;
+            const psikotesAnswered = testAnswers.psikotes.filter(answer => answer !== null).length;
+            
+            container.innerHTML = `
+                <div class="summary-card ${iqCompleted ? 'completed' : 'incomplete'}">
+                    <h4><i class="fas fa-brain"></i> Tes IQ</h4>
+                    <p>${iqAnswered}/30 soal</p>
+                    <p><strong>Status:</strong> ${iqCompleted ? 'Selesai' : 'Belum Selesai'}</p>
+                </div>
+                <div class="summary-card ${discCompleted ? 'completed' : 'incomplete'}">
+                    <h4><i class="fas fa-users"></i> Tes DISC</h4>
+                    <p>${discAnswered}/30 soal</p>
+                    <p><strong>Status:</strong> ${discCompleted ? 'Selesai' : 'Belum Selesai'}</p>
+                </div>
+                <div class="summary-card ${psikotesCompleted ? 'completed' : 'incomplete'}">
+                    <h4><i class="fas fa-chart-bar"></i> Tes Psikotes</h4>
+                    <p>${psikotesAnswered}/30 soal</p>
+                    <p><strong>Status:</strong> ${psikotesCompleted ? 'Selesai' : 'Belum Selesai'}</p>
+                </div>
+            `;
+        }
+
+        // ===================== TEST COMPLETION CHECK =====================
+        function checkTestCompletion(testType) {
+            if (testType === 'iq') {
+                return testAnswers.iq.every(answer => answer !== null);
+            } else if (testType === 'disc') {
+                return testAnswers.disc.every(answer => answer.most !== null && answer.least !== null);
+            } else if (testType === 'psikotes') {
+                return testAnswers.psikotes.every(answer => answer !== null);
+            }
+            return false;
+        }
+
+        function checkAllTestsCompleted() {
+            return checkTestCompletion('iq') && checkTestCompletion('disc') && checkTestCompletion('psikotes');
+        }
+
+        // ===================== LOAD TEST QUESTIONS =====================
+        // IQ Test Questions (30 soal)
+        const iqQuestions = [
+            {
+                question: "Manakah kata yang tidak termasuk dalam kelompoknya?",
+                options: ["Mawar", "Melati", "Anggrek", "Pinus"],
+                correct: 3,
+                explanation: "Pinus adalah pohon, sedangkan lainnya adalah bunga."
+            },
+            {
+                question: "Jika 3x = 81, berapa nilai x?",
+                options: ["2", "3", "4", "5"],
+                correct: 2,
+                explanation: "3⁴ = 81, jadi x = 4"
+            },
+            {
+                question: "Ayah lebih tua dari Ibu. Ibu lebih tua dari Anak. Kesimpulan:",
+                options: [
+                    "Anak lebih muda dari Ayah",
+                    "Ayah lebih muda dari Anak",
+                    "Ibu lebih muda dari Anak",
+                    "Tidak dapat disimpulkan"
+                ],
+                correct: 0,
+                explanation: "Jika Ayah > Ibu dan Ibu > Anak, maka Ayah > Anak."
+            },
+            {
+                question: "2, 5, 10, 17, 26, ...",
+                options: ["35", "37", "39", "41"],
+                correct: 1,
+                explanation: "Pola: +3, +5, +7, +9, +11 → 26+11=37"
+            },
+            {
+                question: "Sinonim dari 'PROLIFERASI' adalah:",
+                options: ["Penyusutan", "Perbanyakan", "Pembekuan", "Pengurangan"],
+                correct: 1,
+                explanation: "Proliferasi berarti perbanyakan atau pertumbuhan cepat."
+            },
+            {
+                question: "25% dari 200 adalah 50% dari berapa?",
+                options: ["25", "50", "100", "200"],
+                correct: 2,
+                explanation: "25% × 200 = 50. 50 adalah 50% dari 100."
+            },
+            {
+                question: "Bunga : Kebun :: Ikan : ?",
+                options: ["Kolam", "Laut", "Akuarium", "Sungai"],
+                correct: 2,
+                explanation: "Bunga ditempatkan di kebun, ikan ditempatkan di akuarium."
+            },
+            {
+                question: "Jika harga barang naik 20% kemudian turun 20%, perubahan totalnya:",
+                options: ["Turun 4%", "Turun 2%", "Sama", "Naik 4%"],
+                correct: 0,
+                explanation: "(1.2 × 0.8) = 0.96 → turun 4%"
+            },
+            {
+                question: "Urutkan kata: MENYIMPULKAN - MENGANALISIS - MENGETAHUI - MEMAHAMI",
+                options: [
+                    "Mengetahui - Memahami - Menganalisis - Menyimpulkan",
+                    "Menganalisis - Mengetahui - Memahami - Menyimpulkan",
+                    "Memahami - Mengetahui - Menganalisis - Menyimpulkan",
+                    "Mengetahui - Menganalisis - Memahami - Menyimpulkan"
+                ],
+                correct: 0,
+                explanation: "Urutan logis proses berpikir: mengetahui → memahami → menganalisis → menyimpulkan."
+            },
+            {
+                question: "Sebuah mobil menempuh 180 km dengan 15 liter bensin. Berapa km/liter efisiensinya?",
+                options: ["10", "12", "15", "18"],
+                correct: 1,
+                explanation: "180 ÷ 15 = 12 km/liter"
+            },
+            {
+                question: "Manakah yang merupakan pasangan kata yang hubungannya mirip dengan PEDANG : TAMENG?",
+                options: [
+                    "Panah : Busur",
+                    "Serangan : Pertahanan",
+                    "Pistol : Peluru",
+                    "Tombak : Perisai"
+                ],
+                correct: 3,
+                explanation: "Pedang berfungsi untuk menyerang, tameng untuk bertahan. Hubungan yang sama: tombak untuk menyerang, perisai untuk bertahan."
+            },
+            {
+                question: "Jika x + y = 15 dan x - y = 5, berapa nilai x?",
+                options: ["5", "10", "15", "20"],
+                correct: 1,
+                explanation: "Tambahkan kedua persamaan: 2x = 20 → x = 10"
+            },
+            {
+                question: "Antonim dari 'KONSERVATIF' adalah:",
+                options: ["Tradisional", "Progresif", "Kolot", "Biasa"],
+                correct: 1,
+                explanation: "Konservatif berarti kolot/tradisional, antonimnya progresif."
+            },
+            {
+                question: "1, 4, 9, 16, 25, ...",
+                options: ["36", "49", "64", "81"],
+                correct: 0,
+                explanation: "Pola kuadrat: 1², 2², 3², 4², 5², 6²=36"
+            },
+            {
+                question: "Semua mamalia bernapas dengan paru-paru. Paus adalah mamalia. Kesimpulan:",
+                options: [
+                    "Paus bernapas dengan paru-paru",
+                    "Semua yang bernapas dengan paru-paru adalah mamalia",
+                    "Paus bukan mamalia",
+                    "Tidak ada kesimpulan yang valid"
+                ],
+                correct: 0,
+                explanation: "Kesimpulan valid: Paus bernapas dengan paru-paru karena semua mamalia bernapas dengan paru-paru dan paus adalah mamalia."
+            },
+            {
+                question: "60% dari 150 + 40% dari 100 = ?",
+                options: ["130", "140", "150", "160"],
+                correct: 0,
+                explanation: "(0.6×150=90) + (0.4×100=40) = 130"
+            },
+            {
+                question: "Jika pernyataan 'Beberapa kucing tidak suka ikan' adalah benar, manakah yang pasti salah?",
+                options: [
+                    "Semua kucing suka ikan",
+                    "Tidak ada kucing yang suka ikan",
+                    "Beberapa kucing suka ikan",
+                    "Sebagian besar kucing suka ikan"
+                ],
+                correct: 0,
+                explanation: "Jika beberapa kucing tidak suka ikan, maka pernyataan 'Semua kucing suka ikan' pasti salah."
+            },
+            {
+                question: "3, 6, 18, 72, 360, ...",
+                options: ["720", "1080", "1440", "2160"],
+                correct: 3,
+                explanation: "Pola: ×2, ×3, ×4, ×5, ×6 → 360×6=2160"
+            },
+            {
+                question: "Sinonim dari 'AMBIGU' adalah:",
+                options: ["Jelas", "Tegas", "Kabur", "Pasti"],
+                correct: 2,
+                explanation: "Ambigu berarti tidak jelas, kabur, atau mempunyai dua arti."
+            },
+            {
+                question: "Sebuah bilangan dikali 3, hasilnya ditambah 5, menjadi 20. Bilangan awal?",
+                options: ["3", "4", "5", "6"],
+                correct: 2,
+                explanation: "3x + 5 = 20 → 3x = 15 → x = 5"
+            },
+            {
+                question: "Manakah kata yang tidak termasuk kelompoknya?",
+                options: ["Merah", "Hijau", "Biru", "Manis"],
+                correct: 3,
+                explanation: "Merah, hijau, biru adalah warna, sedangkan manis adalah rasa."
+            },
+            {
+                question: "5 orang menyelesaikan pekerjaan dalam 8 hari. Berapa hari untuk 10 orang?",
+                options: ["2", "4", "6", "8"],
+                correct: 1,
+                explanation: "5×8 = 40 orang-hari. 40÷10=4 hari"
+            },
+            {
+                question: "Kata 'EDUKASI' paling dekat artinya dengan:",
+                options: ["Hukuman", "Hadiah", "Pengajaran", "Permainan"],
+                correct: 2,
+                explanation: "Edukasi berarti pendidikan atau pengajaran."
+            },
+            {
+                question: "Rata-rata 5 bilangan adalah 12. Jika satu bilangan dihapus, rata-ratanya 11. Bilangan yang dihapus?",
+                options: ["12", "14", "16", "18"],
+                correct: 2,
+                explanation: "Total 5 bilangan: 5×12=60. Total 4 bilangan: 4×11=44. Selisih: 60-44=16"
+            },
+            {
+                question: "Jika X > Y dan Y > Z, maka:",
+                options: [
+                    "X > Z",
+                    "Z > X",
+                    "X = Z",
+                    "Tidak dapat disimpulkan"
+                ],
+                correct: 0,
+                explanation: "Jika X > Y dan Y > Z, maka X > Z (sifat transitif)."
+            },
+            {
+                question: "0.125 dinyatakan dalam pecahan sederhana:",
+                options: ["1/4", "1/6", "1/8", "1/10"],
+                correct: 2,
+                explanation: "0.125 = 125/1000 = 1/8"
+            },
+            {
+                question: "Semua dokter adalah lulusan fakultas kedokteran. Beberapa dokter adalah spesialis bedah. Manakah kesimpulan yang pasti benar?",
+                options: [
+                    "Semua spesialis bedah adalah dokter",
+                    "Beberapa lulusan fakultas kedokteran adalah spesialis bedah",
+                    "Semua lulusan fakultas kedokteran adalah dokter",
+                    "Beberapa spesialis bedah bukan dokter"
+                ],
+                correct: 1,
+                explanation: "Kesimpulan yang pasti benar adalah 'Beberapa lulusan fakultas kedokteran adalah spesialis bedah' karena semua dokter lulusan FK dan beberapa dokter adalah spesialis bedah."
+            },
+            {
+                question: "Waktu di Jakarta adalah 7 jam lebih cepat dari London. Jika di London jam 10:00, di Jakarta jam?",
+                options: ["03:00", "17:00", "18:00", "19:00"],
+                correct: 1,
+                explanation: "10:00 + 7 jam = 17:00"
+            },
+            {
+                question: "Antonim dari 'EFISIEN' adalah:",
+                options: ["Cepat", "Hemat", "Boros", "Produktif"],
+                correct: 2,
+                explanation: "Efisien berarti tidak boros, hemat. Antonimnya adalah boros."
+            },
+            {
+                question: "Berapakah 15% dari 80% dari 200?",
+                options: ["24", "30", "32", "36"],
+                correct: 0,
+                explanation: "80% dari 200 = 160. 15% dari 160 = 24"
+            }
+        ];
+
+        function loadIQQuestions() {
+            const container = document.getElementById('iq-questions');
+            container.innerHTML = '';
+            
+            iqQuestions.forEach((question, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = `question-card ${testAnswers.iq[index] !== null ? 'answered' : ''}`;
+                questionCard.dataset.index = index;
+                
+                let optionsHTML = '';
+                question.options.forEach((option, optionIndex) => {
+                    const isSelected = testAnswers.iq[index] === optionIndex;
+                    optionsHTML += `
+                        <div class="iq-option ${isSelected ? 'selected' : ''}" data-option="${optionIndex}">
+                            <div class="option-letter">${String.fromCharCode(65 + optionIndex)}</div>
+                            <div class="option-text">${option}</div>
+                        </div>
+                    `;
+                });
+                
+                questionCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${index + 1}</div>
+                        <div class="question-text">${question.question}</div>
+                    </div>
+                    <div class="iq-options">${optionsHTML}</div>
+                `;
+                
+                // Add event listeners to options
+                questionCard.querySelectorAll('.iq-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const questionIndex = parseInt(questionCard.dataset.index);
+                        const optionIndex = parseInt(this.dataset.option);
+                        selectIQAnswer(questionIndex, optionIndex);
+                    });
+                });
+                
+                container.appendChild(questionCard);
+            });
+            
+            updateIQProgress();
+        }
+
+        function selectIQAnswer(questionIndex, optionIndex) {
+            testAnswers.iq[questionIndex] = optionIndex;
+            
+            // Update UI
+            const questionCard = document.querySelector(`#iq-questions .question-card[data-index="${questionIndex}"]`);
+            questionCard.classList.add('answered');
+            
+            // Update selected option
+            questionCard.querySelectorAll('.iq-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            questionCard.querySelector(`.iq-option[data-option="${optionIndex}"]`).classList.add('selected');
+            
+            updateIQProgress();
+            updateOverallProgress();
+        }
+
+        function updateIQProgress() {
+            const answeredCount = testAnswers.iq.filter(answer => answer !== null).length;
+            const totalQuestions = iqQuestions.length;
+            const percentage = Math.round((answeredCount / totalQuestions) * 100);
+            
+            document.getElementById('iq-progress-count').textContent = answeredCount;
+            document.getElementById('iq-progress-percent').textContent = `${percentage}%`;
+            document.getElementById('iq-progress-fill').style.width = `${percentage}%`;
+        }
+
+        // DISC Test Questions (30 soal)
+        const discQuestions = [
+            {
+                text: "Ketika memulai proyek baru, saya biasanya:",
+                options: [
+                    { text: "Langsung mengambil inisiatif dan menentukan arah", type: "D" },
+                    { text: "Mengajak diskusi untuk mendapatkan ide-ide segar", type: "I" },
+                    { text: "Mendengarkan dengan cermat kebutuhan semua pihak", type: "S" },
+                    { text: "Menganalisis data dan merencanakan langkah-langkah detil", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam rapat brainstorming, saya cenderung:",
+                options: [
+                    { text: "Memfokuskan diskusi pada tujuan akhir", type: "D" },
+                    { text: "Memunculkan banyak ide dengan antusiasme", type: "I" },
+                    { text: "Memastikan semua anggota tim didengar", type: "S" },
+                    { text: "Mengorganisir dan mengkategorikan ide-ide yang muncul", type: "C" }
+                ]
+            },
+            {
+                text: "Saat tim mengalami kebuntuan kreatif, saya:",
+                options: [
+                    { text: "Mengambil alih dan memberikan solusi langsung", type: "D" },
+                    { text: "Mencoba menghidupkan suasana dengan energi baru", type: "I" },
+                    { text: "Memberikan waktu untuk refleksi dan ketenangan", type: "S" },
+                    { text: "Mengusulkan untuk meninjau kembali data yang ada", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam menghadapi perubahan mendadak, saya:",
+                options: [
+                    { text: "Melihatnya sebagai peluang baru", type: "D" },
+                    { text: "Mencari cara kreatif untuk beradaptasi", type: "I" },
+                    { text: "Butuh waktu untuk menyesuaikan diri", type: "S" },
+                    { text: "Menganalisis dampak perubahan secara menyeluruh", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika presentasi ide kreatif, saya lebih menekankan:",
+                options: [
+                    { text: "Hasil dan dampak yang akan dicapai", type: "D" },
+                    { text: "Cerita inspiratif di balik ide tersebut", type: "I" },
+                    { text: "Manfaat bagi semua pihak yang terlibat", type: "S" },
+                    { text: "Data pendukung dan detail implementasi", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam menangani kritik terhadap karya, saya:",
+                options: [
+                    { text: "Melihatnya sebagai tantangan untuk perbaikan", type: "D" },
+                    { text: "Mencoba memahami perspektif pemberi kritik", type: "I" },
+                    { text: "Menerima dengan rendah hati dan mencoba memperbaiki", type: "S" },
+                    { text: "Menganalisis dasar dan validitas kritik tersebut", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika deadline semakin dekat, saya:",
+                options: [
+                    { text: "Bekerja lebih cepat dan fokus pada hasil", type: "D" },
+                    { text: "Tetap menjaga semangat dan energi tim", type: "I" },
+                    { text: "Tetap tenang dan bekerja sesuai ritme", type: "S" },
+                    { text: "Memeriksa ulang daftar prioritas tugas", type: "C" }
+                ]
+            },
+            {
+                text: "Sebagai bagian dari tim kreatif, saya paling menghargai:",
+                options: [
+                    { text: "Efisiensi dan pencapaian target", type: "D" },
+                    { text: "Kreativitas dan inspirasi", type: "I" },
+                    { text: "Harmoni dan kerja sama tim", type: "S" },
+                    { text: "Akurasi dan kualitas hasil", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika ide kreatif saya ditolak, saya biasanya:",
+                options: [
+                    { text: "Mencari cara lain untuk mewujudkannya", type: "D" },
+                    { text: "Mencoba meyakinkan dengan pendekatan berbeda", type: "I" },
+                    { text: "Menerima dan mencari alternatif yang lebih baik", type: "S" },
+                    { text: "Menganalisis alasan penolakan secara mendalam", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam pengambilan keputusan kreatif, saya:",
+                options: [
+                    { text: "Cepat dan tegas", type: "D" },
+                    { text: "Intuitif dan berdasarkan perasaan", type: "I" },
+                    { text: "Mempertimbangkan dampak pada hubungan", type: "S" },
+                    { text: "Analitis dan berdasarkan data", type: "C" }
+                ]
+            },
+            {
+                text: "Saat menghadapi konflik dalam tim, saya:",
+                options: [
+                    { text: "Langsung menghadapi dan menyelesaikannya", type: "D" },
+                    { text: "Mencoba meredakan dengan humor atau pendekatan positif", type: "I" },
+                    { text: "Berusaha mendengarkan semua pihak dengan sabar", type: "S" },
+                    { text: "Menganalisis akar masalah secara objektif", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam bekerja, saya lebih suka:",
+                options: [
+                    { text: "Mandiri dengan otoritas penuh", type: "D" },
+                    { text: "Kolaborasi dengan banyak orang", type: "I" },
+                    { text: "Tim yang stabil dan kooperatif", type: "S" },
+                    { text: "Proses yang terstruktur dan jelas", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika menghadapi risiko dalam proyek kreatif, saya:",
+                options: [
+                    { text: "Mengambil risiko jika potensi hasilnya besar", type: "D" },
+                    { text: "Melihat risiko sebagai bagian dari petualangan kreatif", type: "I" },
+                    { text: "Hati-hati dan lebih memilih pendekatan aman", type: "S" },
+                    { text: "Menghitung probabilitas risiko secara matang", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam memberikan umpan balik, saya cenderung:",
+                options: [
+                    { text: "Langsung dan to the point", type: "D" },
+                    { text: "Menyampaikan dengan semangat positif", type: "I" },
+                    { text: "Hati-hati dan mempertimbangkan perasaan orang", type: "S" },
+                    { text: "Detail dan spesifik dengan contoh", type: "C" }
+                ]
+            },
+            {
+                text: "Saat belajar hal kreatif baru, saya:",
+                options: [
+                    { text: "Langsung mencoba dan belajar dari pengalaman", type: "D" },
+                    { text: "Mencari mentor atau komunitas untuk belajar", type: "I" },
+                    { text: "Mengikuti instruksi dengan sabar dan teliti", type: "S" },
+                    { text: "Mempelajari teori dan konsepnya terlebih dahulu", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam menyelesaikan masalah kreatif, saya:",
+                options: [
+                    { text: "Fokus pada solusi yang paling efektif", type: "D" },
+                    { text: "Mencari solusi yang unik dan orisinal", type: "I" },
+                    { text: "Mempertimbangkan solusi yang berkelanjutan", type: "S" },
+                    { text: "Menganalisis semua alternatif secara sistematis", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika presentasi, gaya saya lebih:",
+                options: [
+                    { text: "Powerful dan persuasif", type: "D" },
+                    { text: "Energik dan menghibur", type: "I" },
+                    { text: "Tenang dan meyakinkan", type: "S" },
+                    { text: "Logis dan terstruktur", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam menghadapi kegagalan kreatif, saya:",
+                options: [
+                    { text: "Bangkit cepat dan mencoba pendekatan baru", type: "D" },
+                    { text: "Mencari hikmah dan pelajaran dari kegagalan", type: "I" },
+                    { text: "Butuh waktu untuk pulih secara emosional", type: "S" },
+                    { text: "Menganalisis penyebab kegagalan secara detail", type: "C" }
+                ]
+            },
+            {
+                text: "Saat bekerja dalam tim, peran alami saya adalah:",
+                options: [
+                    { text: "Pemimpin dan pengambil keputusan", type: "D" },
+                    { text: "Pemicu ide dan penghubung antaranggota", type: "I" },
+                    { text: "Pendamai dan penjaga harmoni", type: "S" },
+                    { text: "Pengatur detail dan penjamin kualitas", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam mengelola waktu, saya:",
+                options: [
+                    { text: "Fokus pada prioritas yang memberikan hasil terbesar", type: "D" },
+                    { text: "Fleksibel dan spontan", type: "I" },
+                    { text: "Konsisten dengan rutinitas yang telah ditetapkan", type: "S" },
+                    { text: "Terencana dan detail dengan jadwal", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika diberi tugas kreatif baru, saya pertama-tama:",
+                options: [
+                    { text: "Menetapkan target yang ingin dicapai", type: "D" },
+                    { text: "Mencari inspirasi dari berbagai sumber", type: "I" },
+                    { text: "Memahami harapan dan kebutuhan stakeholder", type: "S" },
+                    { text: "Mengumpulkan data dan informasi terkait", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam mengevaluasi ide kreatif, saya paling memperhatikan:",
+                options: [
+                    { text: "Potensi dampak dan hasilnya", type: "D" },
+                    { text: "Originalitas dan daya tariknya", type: "I" },
+                    { text: "Kesesuaian dengan nilai-nilai tim", type: "S" },
+                    { text: "Kelayakan dan data pendukungnya", type: "C" }
+                ]
+            },
+            {
+                text: "Saat berkomunikasi dengan klien, saya:",
+                options: [
+                    { text: "Langsung pada intinya", type: "D" },
+                    { text: "Membangun hubungan yang personal", type: "I" },
+                    { text: "Sabar dan mendengarkan dengan empati", type: "S" },
+                    { text: "Detail dan akurat dalam informasi", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam menghadapi tekanan, saya:",
+                options: [
+                    { text: "Tetap fokus pada solusi", type: "D" },
+                    { text: "Mencari dukungan dari orang sekitar", type: "I" },
+                    { text: "Tetap tenang dan tidak terburu-buru", type: "S" },
+                    { text: "Menganalisis sumber tekanan secara sistematis", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika harus memilih antara beberapa opsi kreatif, saya:",
+                options: [
+                    { text: "Memilih yang paling efektif mencapai tujuan", type: "D" },
+                    { text: "Memilih yang paling unik dan menarik", type: "I" },
+                    { text: "Memilih yang paling diterima semua pihak", type: "S" },
+                    { text: "Memilih yang paling didukung data", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam memberikan apresiasi, saya:",
+                options: [
+                    { text: "Menekankan pada hasil yang dicapai", type: "D" },
+                    { text: "Penuh antusias dan energik", type: "I" },
+                    { text: "Tulus dan personal", type: "S" },
+                    { text: "Spesifik dan detail", type: "C" }
+                ]
+            },
+            {
+                text: "Saat menghadapi ketidakpastian, saya:",
+                options: [
+                    { text: "Membuat keputusan dengan informasi yang ada", type: "D" },
+                    { text: "Melihatnya sebagai peluang untuk eksplorasi", type: "I" },
+                    { text: "Menunggu sampai situasi lebih jelas", type: "S" },
+                    { text: "Mengumpulkan lebih banyak informasi", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam negosiasi kreatif, saya:",
+                options: [
+                    { text: "Bersikap tegas pada hal-hal prinsip", type: "D" },
+                    { text: "Mencari win-win solution yang kreatif", type: "I" },
+                    { text: "Berusaha menjaga hubungan baik", type: "S" },
+                    { text: "Berfokus pada fakta dan data", type: "C" }
+                ]
+            },
+            {
+                text: "Ketika harus bekerja sendiri, saya:",
+                options: [
+                    { text: "Produktif dan fokus", type: "D" },
+                    { text: "Terkadang merasa kurang inspirasi", type: "I" },
+                    { text: "Nyaman dengan ritme sendiri", type: "S" },
+                    { text: "Dapat berkonsentrasi penuh pada detail", type: "C" }
+                ]
+            },
+            {
+                text: "Dalam menerima instruksi, saya:",
+                options: [
+                    { text: "Ingin tahu tujuan besarnya", type: "D" },
+                    { text: "Menyukai instruksi yang fleksibel", type: "I" },
+                    { text: "Mengikuti instruksi dengan teliti", type: "S" },
+                    { text: "Menginginkan instruksi yang detail dan jelas", type: "C" }
+                ]
+            }
+        ];
+
+        function loadDISCQuestions() {
+            const container = document.getElementById('disc-questions');
+            container.innerHTML = '';
+            
+            discQuestions.forEach((question, index) => {
+                const questionCard = document.createElement('div');
+                const isAnswered = testAnswers.disc[index].most !== null && testAnswers.disc[index].least !== null;
+                questionCard.className = `question-card ${isAnswered ? 'answered' : ''}`;
+                questionCard.id = `disc-question-${index}`;
+                
+                // Shuffle options for each question
+                const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+                
+                let tableRows = '';
+                shuffledOptions.forEach((option, optionIndex) => {
+                    const isMostSelected = testAnswers.disc[index].most === option.type;
+                    const isLeastSelected = testAnswers.disc[index].least === option.type;
+                    
+                    tableRows += `
+                        <tr>
+                            <td class="option-text">${option.text}</td>
+                            <td style="text-align: center;">
+                                <div class="disc-checkbox-group">
+                                    <div class="checkbox-label">Paling Sesuai</div>
+                                    <input type="checkbox" class="most-checkbox" 
+                                           data-question-id="${index}" 
+                                           data-option-type="${option.type}"
+                                           ${isMostSelected ? 'checked' : ''}>
+                                </div>
+                            </td>
+                            <td style="text-align: center;">
+                                <div class="disc-checkbox-group">
+                                    <div class="checkbox-label">Paling Tidak Sesuai</div>
+                                    <input type="checkbox" class="least-checkbox" 
+                                           data-question-id="${index}" 
+                                           data-option-type="${option.type}"
+                                           ${isLeastSelected ? 'checked' : ''}>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                questionCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${index + 1}</div>
+                        <div class="question-text">${question.text}</div>
+                    </div>
+                    <table class="disc-options-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 70%;">Pernyataan</th>
+                                <th style="width: 15%;">Paling Sesuai</th>
+                                <th style="width: 15%;">Paling Tidak Sesuai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                        </tbody>
+                    </table>
+                `;
+                
+                container.appendChild(questionCard);
+            });
+            
+            // Add event listeners to checkboxes
+            addDISCEventListeners();
+            updateDISCProgress();
+        }
+
+        function addDISCEventListeners() {
+            document.querySelectorAll('.most-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    handleDISCCheckboxChange(this);
+                });
+            });
+            
+            document.querySelectorAll('.least-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    handleDISCCheckboxChange(this);
+                });
+            });
+        }
+
+        function handleDISCCheckboxChange(checkbox) {
+            const questionId = parseInt(checkbox.dataset.questionId);
+            const optionType = checkbox.dataset.optionType;
+            const isMost = checkbox.classList.contains('most-checkbox');
+            
+            const questionElement = document.getElementById(`disc-question-${questionId}`);
+            const mostCheckboxes = questionElement.querySelectorAll('.most-checkbox');
+            const leastCheckboxes = questionElement.querySelectorAll('.least-checkbox');
+            
+            if (checkbox.checked) {
+                if (isMost) {
+                    // Uncheck other most checkboxes in this question
+                    mostCheckboxes.forEach(cb => {
+                        if (cb !== checkbox) {
+                            cb.checked = false;
+                            if (testAnswers.disc[questionId].most === cb.dataset.optionType) {
+                                testAnswers.disc[questionId].most = null;
+                            }
+                        }
+                    });
+                    
+                    // Set this as most selection
+                    testAnswers.disc[questionId].most = optionType;
+                    
+                    // If this option was previously selected as least, uncheck it
+                    const correspondingLeastCheckbox = Array.from(leastCheckboxes).find(cb => 
+                        cb.dataset.optionType === optionType
+                    );
+                    if (correspondingLeastCheckbox && correspondingLeastCheckbox.checked) {
+                        correspondingLeastCheckbox.checked = false;
+                        testAnswers.disc[questionId].least = null;
+                    }
+                } else {
+                    // Uncheck other least checkboxes in this question
+                    leastCheckboxes.forEach(cb => {
+                        if (cb !== checkbox) {
+                            cb.checked = false;
+                            if (testAnswers.disc[questionId].least === cb.dataset.optionType) {
+                                testAnswers.disc[questionId].least = null;
+                            }
+                        }
+                    });
+                    
+                    // Set this as least selection
+                    testAnswers.disc[questionId].least = optionType;
+                    
+                    // If this option was previously selected as most, uncheck it
+                    const correspondingMostCheckbox = Array.from(mostCheckboxes).find(cb => 
+                        cb.dataset.optionType === optionType
+                    );
+                    if (correspondingMostCheckbox && correspondingMostCheckbox.checked) {
+                        correspondingMostCheckbox.checked = false;
+                        testAnswers.disc[questionId].most = null;
+                    }
+                }
+            } else {
+                // If this checkbox is unchecked
+                if (isMost && testAnswers.disc[questionId].most === optionType) {
+                    testAnswers.disc[questionId].most = null;
+                } else if (!isMost && testAnswers.disc[questionId].least === optionType) {
+                    testAnswers.disc[questionId].least = null;
+                }
+            }
+            
+            // Update question card style
+            const isAnswered = testAnswers.disc[questionId].most !== null && testAnswers.disc[questionId].least !== null;
+            questionElement.classList.toggle('answered', isAnswered);
+            
+            updateDISCProgress();
+            updateOverallProgress();
+        }
+
+        function updateDISCProgress() {
+            const answeredCount = testAnswers.disc.filter(answer => answer.most !== null && answer.least !== null).length;
+            const totalQuestions = discQuestions.length;
+            const percentage = Math.round((answeredCount / totalQuestions) * 100);
+            
+            document.getElementById('disc-progress-count').textContent = answeredCount;
+            document.getElementById('disc-progress-percent').textContent = `${percentage}%`;
+            document.getElementById('disc-progress-fill').style.width = `${percentage}%`;
+        }
+
+        // Psikotes Questions (30 soal)
+        const psikotesQuestions = [
+            {
+                question: "Saat diberi tugas baru, saya biasanya:",
+                options: [
+                    "Langsung membuat rencana detil",
+                    "Mencari inspirasi dari contoh serupa",
+                    "Berdiskusi dengan rekan tentang pendekatan terbaik",
+                    "Fokus pada tujuan akhir yang ingin dicapai"
+                ],
+                category: "work_style"
+            },
+            {
+                question: "Ketika menghadapi kritik, reaksi saya:",
+                options: [
+                    "Menerimanya sebagai masukan berharga",
+                    "Mempertimbangkan sumber kritik",
+                    "Sedikit tersinggung tetapi mencoba memahami",
+                    "Menganalisis validitas kritik tersebut"
+                ],
+                category: "resilience"
+            },
+            {
+                question: "Dalam bekerja dengan deadline ketat, saya:",
+                options: [
+                    "Tetap tenang dan fokus pada prioritas",
+                    "Bekerja lebih cepat dengan sedikit kompromi kualitas",
+                    "Meminta bantuan tim untuk mempercepat",
+                    "Berusaha memenuhi deadline dengan kualitas terbaik"
+                ],
+                category: "pressure_handling"
+            },
+            {
+                question: "Saat ide saya ditolak, saya:",
+                options: [
+                    "Mencari alternatif yang lebih baik",
+                    "Mencoba memahami alasan penolakan",
+                    "Tetap percaya pada ide tersebut",
+                    "Mengumpulkan data untuk mendukung ide"
+                ],
+                category: "creativity"
+            },
+            {
+                question: "Saya paling termotivasi ketika:",
+                options: [
+                    "Melihat hasil konkret dari pekerjaan",
+                    "Mendapatkan apresiasi dari atasan/rekan",
+                    "Bekerja dalam lingkungan yang harmonis",
+                    "Menghadapi tantangan yang kompleks"
+                ],
+                category: "motivation"
+            },
+            {
+                question: "Dalam rapat, peran saya cenderung:",
+                options: [
+                    "Memimpin diskusi ke arah keputusan",
+                    "Memberikan ide-ide segar",
+                    "Mendengarkan dan menengahi perbedaan",
+                    "Menyiapkan data dan analisis"
+                ],
+                category: "team_role"
+            },
+            {
+                question: "Saat menghadapi perubahan, saya:",
+                options: [
+                    "Melihatnya sebagai peluang",
+                    "Butuh waktu untuk beradaptasi",
+                    "Mencari cara untuk memanfaatkannya",
+                    "Menganalisis dampaknya terlebih dahulu"
+                ],
+                category: "adaptability"
+            },
+            {
+                question: "Kualitas kerja yang paling saya banggakan:",
+                options: [
+                    "Ketepatan waktu dan disiplin",
+                    "Kreativitas dan inovasi",
+                    "Kerja sama dan empati",
+                    "Detail dan akurasi"
+                ],
+                category: "work_value"
+            },
+            {
+                question: "Dalam menyelesaikan masalah, saya:",
+                options: [
+                    "Menggunakan logika dan analisis",
+                    "Mencari perspektif berbeda",
+                    "Konsultasi dengan orang lain",
+                    "Mencoba berbagai pendekatan"
+                ],
+                category: "problem_solving"
+            },
+            {
+                question: "Saat merasa stres, saya:",
+                options: [
+                    "Berolahraga atau melakukan aktivitas fisik",
+                    "Berbicara dengan teman atau keluarga",
+                    "Mencari waktu sendiri untuk relaksasi",
+                    "Membuat rencana untuk mengatasi sumber stres"
+                ],
+                category: "stress_management"
+            },
+            {
+                question: "Dalam belajar hal baru, saya:",
+                options: [
+                    "Membaca teori dan konsep terlebih dahulu",
+                    "Langsung mencoba dan belajar dari pengalaman",
+                    "Mencari mentor atau pembimbing",
+                    "Mengikuti kursus yang terstruktur"
+                ],
+                category: "learning_style"
+            },
+            {
+                question: "Saya merasa paling produktif ketika:",
+                options: [
+                    "Bekerja sesuai jadwal yang teratur",
+                    "Ada kebebasan dalam mengatur waktu",
+                    "Bekerja bersama tim yang solid",
+                    "Menghadapi tantangan yang menarik"
+                ],
+                category: "productivity"
+            },
+            {
+                question: "Dalam mengambil keputusan, saya lebih mengandalkan:",
+                options: [
+                    "Data dan fakta yang tersedia",
+                    "Intuisi dan perasaan",
+                    "Masukan dari orang lain",
+                    "Pengalaman masa lalu"
+                ],
+                category: "decision_making"
+            },
+            {
+                question: "Saat presentasi, saya fokus pada:",
+                options: [
+                    "Meyakinkan audiens dengan data",
+                    "Membuat presentasi menarik dan interaktif",
+                    "Membangun koneksi dengan audiens",
+                    "Menyampaikan informasi dengan jelas dan terstruktur"
+                ],
+                category: "communication"
+            },
+            {
+                question: "Dalam bekerja sama dengan orang baru, saya:",
+                options: [
+                    "Langsung membahas pekerjaan",
+                    "Mencari tahu latar belakang mereka",
+                    "Membangun hubungan personal terlebih dahulu",
+                    "Memahami peran dan kontribusi mereka"
+                ],
+                category: "collaboration"
+            },
+            {
+                question: "Saat menerima pujian, saya:",
+                options: [
+                    "Menganggapnya sebagai motivasi untuk lebih baik",
+                    "Merasa senang dan berterima kasih",
+                    "Sedikit malu tetapi senang",
+                    "Menganalisis dasar pujian tersebut"
+                ],
+                category: "self_perception"
+            },
+            {
+                question: "Dalam menghadapi konflik, saya:",
+                options: [
+                    "Langsung menghadapi dan menyelesaikan",
+                    "Mencari solusi kompromi",
+                    "Menghindari konfrontasi langsung",
+                    "Menganalisis akar masalah"
+                ],
+                category: "conflict_resolution"
+            },
+            {
+                question: "Saya paling menghargai dalam lingkungan kerja:",
+                options: [
+                    "Kebebasan berekspresi dan berkreasi",
+                    "Hubungan yang baik dengan rekan kerja",
+                    "Struktur dan kejelasan peran",
+                    "Peluang untuk berkembang"
+                ],
+                category: "work_environment"
+            },
+            {
+                question: "Dalam mengerjakan proyek besar, saya:",
+                options: [
+                    "Membaginya menjadi tugas-tugas kecil",
+                    "Mencari inspirasi dari proyek serupa",
+                    "Berkonsultasi dengan tim secara berkala",
+                    "Fokus pada milestone utama"
+                ],
+                category: "project_management"
+            },
+            {
+                question: "Saat menghadapi kegagalan, saya:",
+                options: [
+                    "Menganalisis penyebab dan belajar",
+                    "Mencari dukungan dari orang lain",
+                    "Mencoba lagi dengan pendekatan berbeda",
+                    "Menerima dan melanjutkan"
+                ],
+                category: "resilience"
+            },
+            {
+                question: "Dalam memberikan feedback, saya:",
+                options: [
+                    "Langsung dan spesifik",
+                    "Menyampaikan dengan positif",
+                    "Hati-hati agar tidak menyinggung",
+                    "Menyertakan contoh konkret"
+                ],
+                category: "feedback"
+            },
+            {
+                question: "Saya merasa paling berkembang ketika:",
+                options: [
+                    "Mendapat tantangan baru",
+                    "Mendapat pengakuan atas kerja keras",
+                    "Bekerja dengan mentor yang baik",
+                    "Mempelajari keterampilan baru"
+                ],
+                category: "growth"
+            },
+            {
+                question: "Dalam menghadapi ketidakpastian, saya:",
+                options: [
+                    "Membuat skenario terbaik dan terburuk",
+                    "Tetap positif dan optimis",
+                    "Mencari kepastian dari sumber terpercaya",
+                    "Menerima dan beradaptasi"
+                ],
+                category: "uncertainty"
+            },
+            {
+                question: "Kualitas terpenting untuk sukses menurut saya:",
+                options: [
+                    "Disiplin dan konsistensi",
+                    "Kreativitas dan inovasi",
+                    "Kerja sama dan empati",
+                    "Analisis dan strategi"
+                ],
+                category: "success_factors"
+            },
+            {
+                question: "Saat merasa jenuh dengan rutinitas, saya:",
+                options: [
+                    "Mencari proyek atau tugas baru",
+                    "Beristirahat sejenak dan refreshing",
+                    "Berbicara dengan rekan tentang perasaan",
+                    "Menganalisis penyebab kejenuhan"
+                ],
+                category: "burnout_prevention"
+            },
+            {
+                question: "Dalam bekerja dengan detail, saya:",
+                options: [
+                    "Sangat teliti dan hati-hati",
+                    "Terkadang melewatkan detail kecil",
+                    "Meminta orang lain memeriksa",
+                    "Fokus pada gambaran besar"
+                ],
+                category: "attention_to_detail"
+            },
+            {
+                question: "Saya paling menikmati pekerjaan yang:",
+                options: [
+                    "Memberi kebebasan kreatif",
+                    "Melibatkan interaksi sosial",
+                    "Memiliki prosedur yang jelas",
+                    "Menantang kemampuan analitis"
+                ],
+                category: "job_preference"
+            },
+            {
+                question: "Dalam menghadapi tekanan waktu, saya:",
+                options: [
+                    "Tetap tenang dan fokus",
+                    "Bekerja lebih cepat",
+                    "Meminta bantuan jika perlu",
+                    "Mengatur ulang prioritas"
+                ],
+                category: "time_pressure"
+            },
+            {
+                question: "Saat harus belajar banyak hal baru sekaligus, saya:",
+                options: [
+                    "Membuat jadwal belajar terstruktur",
+                    "Mencoba sedikit demi sedikit",
+                    "Belajar bersama orang lain",
+                    "Fokus pada yang paling penting dulu"
+                ],
+                category: "multitasking"
+            },
+            {
+                question: "Saya percaya kunci keberhasilan adalah:",
+                options: [
+                    "Kerja keras dan ketekunan",
+                    "Hubungan dan jaringan",
+                    "Ide yang brillian dan inovatif",
+                    "Perencanaan dan strategi"
+                ],
+                category: "success_beliefs"
+            }
+        ];
+
+        function loadPsikotesQuestions() {
+            const container = document.getElementById('psikotes-questions');
+            container.innerHTML = '';
+            
+            psikotesQuestions.forEach((question, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = `question-card ${testAnswers.psikotes[index] !== null ? 'answered' : ''}`;
+                questionCard.dataset.index = index;
+                
+                let optionsHTML = '';
+                question.options.forEach((option, optionIndex) => {
+                    const isSelected = testAnswers.psikotes[index] === optionIndex;
+                    optionsHTML += `
+                        <div class="psikotes-option ${isSelected ? 'selected' : ''}" data-option="${optionIndex}">
+                            <input type="radio" name="psikotes-${index}" ${isSelected ? 'checked' : ''} data-option="${optionIndex}">
+                            <div class="option-text">${option}</div>
+                        </div>
+                    `;
+                });
+                
+                questionCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${index + 1}</div>
+                        <div class="question-text">${question.question}</div>
+                    </div>
+                    <div class="psikotes-options">${optionsHTML}</div>
+                `;
+                
+                // Add event listeners to options
+                questionCard.querySelectorAll('.psikotes-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const questionIndex = parseInt(questionCard.dataset.index);
+                        const optionIndex = parseInt(this.dataset.option);
+                        selectPsikotesAnswer(questionIndex, optionIndex);
+                    });
+                });
+                
+                // Also add event listeners to radio buttons
+                questionCard.querySelectorAll('input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        const questionIndex = parseInt(questionCard.dataset.index);
+                        const optionIndex = parseInt(this.dataset.option);
+                        selectPsikotesAnswer(questionIndex, optionIndex);
+                    });
+                });
+                
+                container.appendChild(questionCard);
+            });
+            
+            updatePsikotesProgress();
+        }
+
+        function selectPsikotesAnswer(questionIndex, optionIndex) {
+            testAnswers.psikotes[questionIndex] = optionIndex;
+            
+            // Update UI
+            const questionCard = document.querySelector(`#psikotes-questions .question-card[data-index="${questionIndex}"]`);
+            questionCard.classList.add('answered');
+            
+            // Update selected option
+            questionCard.querySelectorAll('.psikotes-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            questionCard.querySelector(`.psikotes-option[data-option="${optionIndex}"]`).classList.add('selected');
+            
+            // Update radio button
+            questionCard.querySelector(`input[data-option="${optionIndex}"]`).checked = true;
+            
+            updatePsikotesProgress();
+            updateOverallProgress();
+        }
+
+        function updatePsikotesProgress() {
+            const answeredCount = testAnswers.psikotes.filter(answer => answer !== null).length;
+            const totalQuestions = psikotesQuestions.length;
+            const percentage = Math.round((answeredCount / totalQuestions) * 100);
+            
+            document.getElementById('psikotes-progress-count').textContent = answeredCount;
+            document.getElementById('psikotes-progress-percent').textContent = `${percentage}%`;
+            document.getElementById('psikotes-progress-fill').style.width = `${percentage}%`;
+        }
+
+        // ===================== CALCULATE RESULTS =====================
+        function calculateAllResults() {
+            calculateIQResults();
+            calculateDISCResults();
+            calculatePsikotesResults();
+        }
+
+        function calculateIQResults() {
+            let correctCount = 0;
+            
+            iqQuestions.forEach((question, index) => {
+                if (testAnswers.iq[index] === question.correct) {
+                    correctCount++;
+                }
+            });
+            
+            // Skor IQ dihitung dari 70-130
+            const score = Math.round((correctCount / iqQuestions.length) * 60) + 70;
+            const classification = getIQClassification(score);
+            
+            testResults.iq = {
+                score: score,
+                classification: classification,
+                details: {
+                    correct: correctCount,
+                    total: iqQuestions.length,
+                    percentage: Math.round((correctCount / iqQuestions.length) * 100)
+                }
+            };
+        }
+
+        function getIQClassification(score) {
+            if (score >= 130) return { name: 'Sangat Superior', color: '#27ae60', description: 'Kemampuan intelektual luar biasa' };
+            if (score >= 120) return { name: 'Superior', color: '#2ecc71', description: 'Kemampuan intelektual di atas rata-rata' };
+            if (score >= 110) return { name: 'Di Atas Rata-rata', color: '#3498db', description: 'Kemampuan intelektual cukup tinggi' };
+            if (score >= 90) return { name: 'Rata-rata', color: '#9b59b6', description: 'Kemampuan intelektual rata-rata' };
+            if (score >= 80) return { name: 'Di Bawah Rata-rata', color: '#e67e22', description: 'Kemampuan intelektual sedikit di bawah rata-rata' };
+            return { name: 'Sangat Di Bawah Rata-rata', color: '#e74c3c', description: 'Kemampuan intelektual perlu pengembangan' };
+        }
+
+        function calculateDISCResults() {
+            let scores = { D: 0, I: 0, S: 0, C: 0 };
+            
+            // Count selections for each type
+            testAnswers.disc.forEach(selections => {
+                // Add points for "most" selections (2 points each)
+                if (selections.most) {
+                    scores[selections.most] += 2;
+                }
+                
+                // Subtract points for "least" selections (1 point each)
+                if (selections.least) {
+                    scores[selections.least] -= 1;
+                }
+            });
+            
+            // Normalize scores to positive values
+            let minScore = Math.min(...Object.values(scores));
+            if (minScore < 0) {
+                for (const type in scores) {
+                    scores[type] += Math.abs(minScore);
+                }
+            }
+            
+            // Convert to percentages
+            const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+            if (totalScore > 0) {
+                for (const type in scores) {
+                    scores[type] = Math.round((scores[type] / totalScore) * 100);
+                }
+            }
+            
+            // Determine primary type
+            let primaryType = '';
+            let highestScore = 0;
+            
+            for (const type in scores) {
+                if (scores[type] > highestScore) {
+                    highestScore = scores[type];
+                    primaryType = type;
+                }
+            }
+            
+            const discTypes = {
+                D: { name: "Dominance", fullName: "Dominan", description: "Kepemimpinan, tegas, berorientasi hasil" },
+                I: { name: "Influence", fullName: "Pengaruh", description: "Inspiratif, persuasif, bersosialisasi" },
+                S: { name: "Steadiness", fullName: "Stabil", description: "Sabar, konsisten, kooperatif" },
+                C: { name: "Conscientiousness", fullName: "Teliti", description: "Analitis, akurat, sistematis" }
+            };
+            
+            testResults.disc = {
+                primary: primaryType,
+                scores: scores,
+                details: discTypes[primaryType] || discTypes.D
+            };
+        }
+
+        function calculatePsikotesResults() {
+            let creativeScore = 0;
+            let analyticalScore = 0;
+            let socialScore = 0;
+            let structuredScore = 0;
+            
+            psikotesQuestions.forEach((question, index) => {
+                const answer = testAnswers.psikotes[index];
+                if (answer !== null) {
+                    // Scoring logic based on question category and answer
+                    switch(question.category) {
+                        case 'work_style':
+                        case 'creativity':
+                        case 'job_preference':
+                            if (answer === 1) creativeScore += 2; // Creative options
+                            else if (answer === 0) structuredScore += 1;
+                            else if (answer === 2) socialScore += 1;
+                            else if (answer === 3) analyticalScore += 1;
+                            break;
+                        case 'problem_solving':
+                        case 'decision_making':
+                        case 'attention_to_detail':
+                            if (answer === 0 || answer === 3) analyticalScore += 2; // Analytical options
+                            else if (answer === 1) creativeScore += 1;
+                            else if (answer === 2) socialScore += 1;
+                            break;
+                        case 'team_role':
+                        case 'collaboration':
+                        case 'communication':
+                            if (answer === 2) socialScore += 2; // Social options
+                            else if (answer === 1) creativeScore += 1;
+                            else if (answer === 0) structuredScore += 1;
+                            break;
+                        case 'project_management':
+                        case 'time_pressure':
+                        case 'work_value':
+                            if (answer === 0) structuredScore += 2; // Structured options
+                            else if (answer === 2) socialScore += 1;
+                            else if (answer === 3) analyticalScore += 1;
+                            break;
+                        default:
+                            // Default scoring
+                            if (answer === 0) structuredScore += 1;
+                            else if (answer === 1) creativeScore += 1;
+                            else if (answer === 2) socialScore += 1;
+                            else if (answer === 3) analyticalScore += 1;
+                    }
+                }
+            });
+            
+            // Determine primary style
+            const scores = { creative: creativeScore, analytical: analyticalScore, social: socialScore, structured: structuredScore };
+            let primaryStyle = '';
+            let highestScore = 0;
+            
+            for (const style in scores) {
+                if (scores[style] > highestScore) {
+                    highestScore = scores[style];
+                    primaryStyle = style;
+                }
+            }
+            
+            const styleDescriptions = {
+                creative: { name: "Kreatif & Inovatif", description: "Berpikir out-of-the-box, suka eksperimen, berorientasi pada ide baru" },
+                analytical: { name: "Analitis & Strategis", description: "Logis, data-driven, suka menganalisis sebelum bertindak" },
+                social: { name: "Sosial & Kolaboratif", description: "Team player, komunikator baik, empati tinggi" },
+                structured: { name: "Terstruktur & Terorganisir", description: "Disiplin, detail-oriented, suka rutinitas yang jelas" }
+            };
+            
+            testResults.psikotes = {
+                scores: scores,
+                primaryStyle: primaryStyle,
+                summary: styleDescriptions[primaryStyle] || styleDescriptions.creative
+            };
+        }
+
+        // ===================== DISPLAY RESULTS =====================
+        function displayResults() {
+            // Display candidate info
+            document.getElementById('result-name').textContent = candidateData.name || "-";
+            document.getElementById('result-email').textContent = candidateData.email || "-";
+            document.getElementById('result-phone').textContent = candidateData.phone || "-";
+            document.getElementById('result-position').textContent = candidateData.position ? candidateData.position.name : "-";
+            document.getElementById('result-date').textContent = candidateData.testDate;
+            
+            // Display IQ results
+            displayIQResults();
+            
+            // Display DISC results
+            displayDISCResults();
+            
+            // Display Psikotes results
+            displayPsikotesResults();
+            
+            // Display recommendations
+            displayRecommendations();
+        }
+
+        function displayIQResults() {
+            const iqResult = testResults.iq;
+            document.getElementById('iq-score-value').textContent = iqResult.score;
+            document.getElementById('iq-classification').innerHTML = `
+                <strong>${iqResult.classification.name}</strong> - ${iqResult.classification.description}<br>
+                <small>${iqResult.details.correct} jawaban benar dari ${iqResult.details.total} soal (${iqResult.details.percentage}%)</small>
+            `;
+            
+            // Update progress bar
+            const iqPercentage = Math.min(Math.max(((iqResult.score - 70) / 60) * 100, 0), 100);
+            document.getElementById('iq-score-bar').style.width = `${iqPercentage}%`;
+            
+            // Create IQ chart
+            const iqCtx = document.getElementById('iq-chart').getContext('2d');
+            if (window.iqChart) {
+                window.iqChart.destroy();
+            }
+            window.iqChart = new Chart(iqCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Skor IQ'],
+                    datasets: [{
+                        data: [iqResult.score - 70, 130 - iqResult.score],
+                        backgroundColor: [iqResult.classification.color, '#e9ecef'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+        }
+
+        function displayDISCResults() {
+            const discResult = testResults.disc;
+            const discTypes = {
+                D: { name: "Dominan", color: "#e74c3c" },
+                I: { name: "Pengaruh", color: "#f39c12" },
+                S: { name: "Stabil", color: "#2ecc71" },
+                C: { name: "Teliti", color: "#3498db" }
+            };
+            
+            document.getElementById('disc-primary-type').innerHTML = `
+                <strong>Tipe Utama: ${discResult.primary} - ${discResult.details.fullName}</strong><br>
+                <small>${discResult.details.description}</small>
+            `;
+            
+            // Create DISC chart
+            const discCtx = document.getElementById('disc-chart').getContext('2d');
+            if (window.discChart) {
+                window.discChart.destroy();
+            }
+            window.discChart = new Chart(discCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Dominan', 'Pengaruh', 'Stabil', 'Teliti'],
+                    datasets: [{
+                        label: 'Profil DISC',
+                        data: [
+                            discResult.scores.D || 0,
+                            discResult.scores.I || 0,
+                            discResult.scores.S || 0,
+                            discResult.scores.C || 0
+                        ],
+                        backgroundColor: 'rgba(67, 97, 238, 0.2)',
+                        borderColor: '#4361ee',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#4361ee',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 25
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+            
+            // Display DISC details
+            let detailsHTML = '<div style="margin-top: 20px;">';
+            for (const type in discResult.scores) {
+                const typeInfo = discTypes[type];
+                detailsHTML += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>${type} - ${typeInfo.name}:</span>
+                        <span style="font-weight: bold; color: ${typeInfo.color}">${discResult.scores[type]}%</span>
+                    </div>
+                `;
+            }
+            detailsHTML += '</div>';
+            document.getElementById('disc-details').innerHTML = detailsHTML;
+        }
+
+        function displayPsikotesResults() {
+            const psikotesResult = testResults.psikotes;
+            
+            document.getElementById('psikotes-summary').innerHTML = `
+                <strong>Gaya Kerja: ${psikotesResult.summary.name}</strong><br>
+                <small>${psikotesResult.summary.description}</small>
+            `;
+            
+            // Create Psikotes chart
+            const psikotesCtx = document.getElementById('psikotes-chart').getContext('2d');
+            if (window.psikotesChart) {
+                window.psikotesChart.destroy();
+            }
+            window.psikotesChart = new Chart(psikotesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Kreatif', 'Analitis', 'Sosial', 'Terstruktur'],
+                    datasets: [{
+                        label: 'Skor',
+                        data: [
+                            psikotesResult.scores.creative || 0,
+                            psikotesResult.scores.analytical || 0,
+                            psikotesResult.scores.social || 0,
+                            psikotesResult.scores.structured || 0
+                        ],
+                        backgroundColor: [
+                            '#f72585',
+                            '#4361ee',
+                            '#4cc9f0',
+                            '#7209b7'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 40,
+                            title: {
+                                display: true,
+                                text: 'Skor'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Gaya Kerja'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+            
+            // Display Psikotes details
+            let detailsHTML = '<div style="margin-top: 20px;">';
+            for (const style in psikotesResult.scores) {
+                const styleNames = {
+                    creative: "Kreatif & Inovatif",
+                    analytical: "Analitis & Strategis",
+                    social: "Sosial & Kolaboratif",
+                    structured: "Terstruktur & Terorganisir"
+                };
+                detailsHTML += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>${styleNames[style]}:</span>
+                        <span style="font-weight: bold;">${psikotesResult.scores[style]} poin</span>
+                    </div>
+                `;
+            }
+            detailsHTML += '</div>';
+            document.getElementById('psikotes-details').innerHTML = detailsHTML;
+        }
+
+        function displayRecommendations() {
+            const position = candidateData.position;
+            const iqResult = testResults.iq;
+            const discResult = testResults.disc;
+            const psikotesResult = testResults.psikotes;
+            
+            // Determine strengths
+            const strengths = identifyStrengths(iqResult, discResult, psikotesResult);
+            let strengthsHTML = '<ul>';
+            strengths.forEach(strength => {
+                strengthsHTML += `<li>${strength}</li>`;
+            });
+            strengthsHTML += '</ul>';
+            document.getElementById('strengths-list').innerHTML = strengthsHTML;
+            
+            // Determine development areas
+            const developmentAreas = identifyDevelopmentAreas(iqResult, discResult, psikotesResult);
+            let developmentHTML = '<ul>';
+            developmentAreas.forEach(area => {
+                developmentHTML += `<li>${area}</li>`;
+            });
+            developmentHTML += '</ul>';
+            document.getElementById('development-areas').innerHTML = developmentHTML;
+            
+            // Determine position suitability
+            const suitability = assessPositionSuitability(position, iqResult, discResult, psikotesResult);
+            let suitabilityHTML = `<p><strong>Kesesuaian dengan posisi ${position.name}: ${suitability.score}/10</strong></p>`;
+            suitabilityHTML += '<ul>';
+            suitability.reasons.forEach(reason => {
+                suitabilityHTML += `<li>${reason}</li>`;
+            });
+            suitabilityHTML += '</ul>';
+            document.getElementById('position-suitability').innerHTML = suitabilityHTML;
+            
+            // Generate final recommendation
+            const finalRecommendation = generateFinalRecommendation(position, suitability);
+            document.getElementById('final-recommendation-text').innerHTML = finalRecommendation;
+        }
+
+        function identifyStrengths(iqResult, discResult, psikotesResult) {
+            const strengths = [];
+            
+            // IQ strengths
+            if (iqResult.score >= 120) {
+                strengths.push("Kemampuan analitis dan logika yang sangat baik");
+            } else if (iqResult.score >= 110) {
+                strengths.push("Kemampuan analitis di atas rata-rata");
+            } else if (iqResult.score >= 90) {
+                strengths.push("Kemampuan analitis yang memadai");
+            }
+            
+            // DISC strengths
+            const discType = discResult.primary;
+            if (discType === 'D') {
+                strengths.push("Kepemimpinan dan ketegasan dalam mengambil keputusan");
+            } else if (discType === 'I') {
+                strengths.push("Kemampuan komunikasi dan persuasi yang baik");
+            } else if (discType === 'S') {
+                strengths.push("Stabilitas dan kemampuan kerja sama tim");
+            } else if (discType === 'C') {
+                strengths.push("Ketelitian dan perhatian terhadap detail");
+            }
+            
+            // Psikotes strengths
+            const psikotesStyle = psikotesResult.primaryStyle;
+            if (psikotesStyle === 'creative') {
+                strengths.push("Kreativitas dan kemampuan berpikir inovatif");
+            } else if (psikotesStyle === 'analytical') {
+                strengths.push("Kemampuan analisis data dan pemecahan masalah sistematis");
+            } else if (psikotesStyle === 'social') {
+                strengths.push("Kemampuan kolaborasi dan empati dalam tim");
+            } else if (psikotesStyle === 'structured') {
+                strengths.push("Keteraturan dan kemampuan perencanaan yang baik");
+            }
+            
+            return strengths;
+        }
+
+        function identifyDevelopmentAreas(iqResult, discResult, psikotesResult) {
+            const areas = [];
+            
+            // IQ development areas
+            if (iqResult.score < 90) {
+                areas.push("Perlu pengembangan kemampuan berpikir logis dan analitis");
+            }
+            
+            // DISC development areas
+            const discType = discResult.primary;
+            if (discType === 'D') {
+                areas.push("Perlu mengembangkan empati dan kemampuan mendengarkan");
+            } else if (discType === 'I') {
+                areas.push("Perlu meningkatkan perhatian terhadap detail dan follow-through");
+            } else if (discType === 'S') {
+                areas.push("Perlu meningkatkan ketegasan dan kemampuan mengambil keputusan cepat");
+            } else if (discType === 'C') {
+                areas.push("Perlu mengembangkan fleksibilitas dan adaptasi terhadap perubahan");
+            }
+            
+            // Psikotes development areas (opposite of strengths)
+            const psikotesStyle = psikotesResult.primaryStyle;
+            if (psikotesStyle === 'creative') {
+                areas.push("Perlu meningkatkan kemampuan struktur dan perencanaan teratur");
+            } else if (psikotesStyle === 'analytical') {
+                areas.push("Perlu mengembangkan intuisi dan thinking outside the box");
+            } else if (psikotesStyle === 'social') {
+                areas.push("Perlu meningkatkan kemampuan bekerja mandiri dan fokus individu");
+            } else if (psikotesStyle === 'structured') {
+                areas.push("Perlu mengembangkan fleksibilitas dan adaptasi terhadap perubahan mendadak");
+            }
+            
+            return areas;
+        }
+
+        function assessPositionSuitability(position, iqResult, discResult, psikotesResult) {
+            let score = 7; // Base score
+            
+            if (!position) return { score: 0, reasons: ["Posisi belum dipilih"] };
+            
+            // Adjust based on position requirements
+            switch(position.id) {
+                case 1: // Social Media Specialist
+                    if (discResult.primary === 'I') score += 2;
+                    if (psikotesResult.primaryStyle === 'creative') score += 1;
+                    if (psikotesResult.primaryStyle === 'social') score += 1;
+                    break;
+                case 2: // Designer
+                    if (psikotesResult.primaryStyle === 'creative') score += 3;
+                    if (discResult.primary === 'C') score += 1;
+                    break;
+                case 3: // Video Editor
+                    if (discResult.primary === 'C') score += 2;
+                    if (psikotesResult.primaryStyle === 'structured') score += 1;
+                    if (psikotesResult.primaryStyle === 'creative') score += 1;
+                    break;
+                case 4: // Videografer
+                    if (discResult.primary === 'D') score += 1;
+                    if (psikotesResult.primaryStyle === 'creative') score += 2;
+                    if (psikotesResult.primaryStyle === 'structured') score += 1;
+                    break;
+                case 5: // Ads Specialist
+                    if (discResult.primary === 'I') score += 2;
+                    if (psikotesResult.primaryStyle === 'analytical') score += 1;
+                    if (psikotesResult.primaryStyle === 'creative') score += 1;
+                    break;
+                case 6: // Marketing Communication
+                    if (discResult.primary === 'I') score += 2;
+                    if (psikotesResult.primaryStyle === 'social') score += 2;
+                    break;
+                case 7: // Project Manager/Art Director
+                    if (discResult.primary === 'D') score += 2;
+                    if (psikotesResult.primaryStyle === 'structured') score += 1;
+                    if (psikotesResult.primaryStyle === 'analytical') score += 1;
+                    break;
+            }
+            
+            // Adjust based on IQ
+            if (iqResult.score >= 110) score += 1;
+            if (iqResult.score >= 120) score += 1;
+            
+            // Ensure score is between 1-10
+            score = Math.min(Math.max(score, 1), 10);
+            
+            // Generate reasons
+            const reasons = generateSuitabilityReasons(position, iqResult, discResult, psikotesResult);
+            
+            return { score, reasons };
+        }
+
+        function generateSuitabilityReasons(position, iqResult, discResult, psikotesResult) {
+            const reasons = [];
+            
+            reasons.push(`Skor IQ ${iqResult.score} menunjukkan kemampuan kognitif ${iqResult.score >= 110 ? 'di atas rata-rata' : 'yang memadai'} untuk posisi ini.`);
+            
+            const discTypeNames = { D: "Dominan", I: "Pengaruh", S: "Stabil", C: "Teliti" };
+            reasons.push(`Tipe kepribadian ${discTypeNames[discResult.primary]} ${getDIscSuitabilityText(position.id, discResult.primary)}.`);
+            
+            const psikotesStyleNames = {
+                creative: "Kreatif & Inovatif",
+                analytical: "Analitis & Strategis", 
+                social: "Sosial & Kolaboratif",
+                structured: "Terstruktur & Terorganisir"
+            };
+            reasons.push(`Gaya kerja ${psikotesStyleNames[psikotesResult.primaryStyle]} ${getPsikotesSuitabilityText(position.id, psikotesResult.primaryStyle)}.`);
+            
+            return reasons;
+        }
+
+        function getDIscSuitabilityText(positionId, discType) {
+            const suitabilityMap = {
+                1: { D: "cukup relevan", I: "sangat relevan", S: "cukup relevan", C: "kurang relevan" },
+                2: { D: "cukup relevan", I: "cukup relevan", S: "cukup relevan", C: "sangat relevan" },
+                3: { D: "cukup relevan", I: "kurang relevan", S: "cukup relevan", C: "sangat relevan" },
+                4: { D: "sangat relevan", I: "cukup relevan", S: "kurang relevan", C: "cukup relevan" },
+                5: { D: "cukup relevan", I: "sangat relevan", S: "cukup relevan", C: "cukup relevan" },
+                6: { D: "cukup relevan", I: "sangat relevan", S: "sangat relevan", C: "kurang relevan" },
+                7: { D: "sangat relevan", I: "cukup relevan", S: "cukup relevan", C: "sangat relevan" }
+            };
+            
+            return suitabilityMap[positionId]?.[discType] || "cukup relevan";
+        }
+
+        function getPsikotesSuitabilityText(positionId, style) {
+            const suitabilityMap = {
+                1: { creative: "sangat relevan", analytical: "cukup relevan", social: "sangat relevan", structured: "cukup relevan" },
+                2: { creative: "sangat relevan", analytical: "cukup relevan", social: "cukup relevan", structured: "cukup relevan" },
+                3: { creative: "sangat relevan", analytical: "cukup relevan", social: "kurang relevan", structured: "sangat relevan" },
+                4: { creative: "sangat relevan", analytical: "cukup relevan", social: "cukup relevan", structured: "sangat relevan" },
+                5: { creative: "sangat relevan", analytical: "sangat relevan", social: "cukup relevan", structured: "cukup relevan" },
+                6: { creative: "cukup relevan", analytical: "cukup relevan", social: "sangat relevan", structured: "cukup relevan" },
+                7: { creative: "cukup relevan", analytical: "sangat relevan", social: "cukup relevan", structured: "sangat relevan" }
+            };
+            
+            return suitabilityMap[positionId]?.[style] || "cukup relevan";
+        }
+
+        function generateFinalRecommendation(position, suitability) {
+            let recommendation = '';
+            
+            if (!position) {
+                recommendation = `<p><strong>REKOMENDASI:</strong> Silakan pilih posisi terlebih dahulu untuk mendapatkan rekomendasi yang lebih spesifik.</p>`;
+                return recommendation;
+            }
+            
+            if (suitability.score >= 9) {
+                recommendation = `<p><strong>REKOMENDASI TINGGI:</strong> Kandidat sangat sesuai untuk posisi ${position.name}. Profil yang dimiliki mencakup sebagian besar kualifikasi yang dibutuhkan.</p>`;
+                recommendation += `<p><strong>Saran:</strong> Dapat dipertimbangkan untuk proses selanjutnya dengan fokus pada pengalaman teknis yang spesifik.</p>`;
+            } else if (suitability.score >= 7) {
+                recommendation = `<p><strong>REKOMENDASI SEDANG:</strong> Kandidat cukup sesuai untuk posisi ${position.name}. Terdapat potensi yang dapat dikembangkan lebih lanjut.</p>`;
+                recommendation += `<p><strong>Saran:</strong> Perlu dievaluasi lebih lanjut melalui wawancara teknis untuk menguji kemampuan spesifik.</p>`;
+            } else {
+                recommendation = `<p><strong>REKOMENDASI RENDAH:</strong> Kandidat kurang sesuai untuk posisi ${position.name}. Profil yang dimiliki tidak sepenuhnya memenuhi kebutuhan posisi.</p>`;
+                recommendation += `<p><strong>Saran:</strong> Dapat dipertimbangkan untuk posisi lain yang lebih sesuai dengan profil kandidat.</p>`;
+            }
+            
+            // Add specific development suggestions
+            recommendation += `<p><strong>Rencana Pengembangan:</strong> Fokus pada pengembangan area yang telah diidentifikasi untuk meningkatkan kesesuaian dengan posisi ini.</p>`;
+            
+            return recommendation;
+        }
+
+        // ===================== VIEW RESULTS FUNCTIONS =====================
+        function showInterimResults() {
+            const modal = document.getElementById('interim-results-modal');
+            const content = document.getElementById('interim-results-content');
+            
+            const iqCompleted = checkTestCompletion('iq');
+            const discCompleted = checkTestCompletion('disc');
+            const psikotesCompleted = checkTestCompletion('psikotes');
+            
+            const totalQuestions = 90;
+            let answeredCount = 0;
+            answeredCount += testAnswers.iq.filter(answer => answer !== null).length;
+            answeredCount += testAnswers.disc.filter(answer => answer.most !== null && answer.least !== null).length;
+            answeredCount += testAnswers.psikotes.filter(answer => answer !== null).length;
+            const percentage = Math.round((answeredCount / totalQuestions) * 100);
+            
+            let resultsHTML = `
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span>Progress Keseluruhan: <strong>${answeredCount}/90 soal</strong></span>
+                        <span><strong>${percentage}%</strong></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+                
+                <div class="test-summary">
+                    <div class="summary-card ${iqCompleted ? 'completed' : 'incomplete'}">
+                        <h4><i class="fas fa-brain"></i> Tes IQ</h4>
+                        <p>${testAnswers.iq.filter(answer => answer !== null).length}/30 soal</p>
+                        <p><strong>Status:</strong> ${iqCompleted ? 'Selesai' : 'Belum Selesai'}</p>
+                        ${iqCompleted ? '<button class="btn btn-secondary" onclick="showDetailedResults(\'iq\')">Lihat Hasil</button>' : ''}
+                    </div>
+                    <div class="summary-card ${discCompleted ? 'completed' : 'incomplete'}">
+                        <h4><i class="fas fa-users"></i> Tes DISC</h4>
+                        <p>${testAnswers.disc.filter(answer => answer.most !== null && answer.least !== null).length}/30 soal</p>
+                        <p><strong>Status:</strong> ${discCompleted ? 'Selesai' : 'Belum Selesai'}</p>
+                        ${discCompleted ? '<button class="btn btn-secondary" onclick="showDetailedResults(\'disc\')">Lihat Hasil</button>' : ''}
+                    </div>
+                    <div class="summary-card ${psikotesCompleted ? 'completed' : 'incomplete'}">
+                        <h4><i class="fas fa-chart-bar"></i> Tes Psikotes</h4>
+                        <p>${testAnswers.psikotes.filter(answer => answer !== null).length}/30 soal</p>
+                        <p><strong>Status:</strong> ${psikotesCompleted ? 'Selesai' : 'Belum Selesai'}</p>
+                        ${psikotesCompleted ? '<button class="btn btn-secondary" onclick="showDetailedResults(\'psikotes\')">Lihat Hasil</button>' : ''}
+                    </div>
+                </div>
+            `;
+            
+            // Add completed test results
+            if (iqCompleted || discCompleted || psikotesCompleted) {
+                resultsHTML += `<h3 style="margin-top: 30px; color: var(--primary);"><i class="fas fa-chart-line"></i> Hasil yang Tersedia</h3>`;
+                
+                if (iqCompleted) {
+                    calculateIQResults();
+                    resultsHTML += `
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #4361ee;">
+                            <h4><i class="fas fa-brain"></i> Hasil Tes IQ</h4>
+                            <p><strong>Skor:</strong> ${testResults.iq.score}</p>
+                            <p><strong>Klasifikasi:</strong> ${testResults.iq.classification.name}</p>
+                            <p><strong>Jawaban Benar:</strong> ${testResults.iq.details.correct}/30 (${testResults.iq.details.percentage}%)</p>
+                        </div>
+                    `;
+                }
+                
+                if (discCompleted) {
+                    calculateDISCResults();
+                    resultsHTML += `
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #7209b7;">
+                            <h4><i class="fas fa-users"></i> Hasil Tes DISC</h4>
+                            <p><strong>Tipe Utama:</strong> ${testResults.disc.primary} - ${testResults.disc.details.fullName}</p>
+                            <p><strong>Deskripsi:</strong> ${testResults.disc.details.description}</p>
+                        </div>
+                    `;
+                }
+                
+                if (psikotesCompleted) {
+                    calculatePsikotesResults();
+                    resultsHTML += `
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #f72585;">
+                            <h4><i class="fas fa-chart-bar"></i> Hasil Tes Psikotes</h4>
+                            <p><strong>Gaya Kerja:</strong> ${testResults.psikotes.summary.name}</p>
+                            <p><strong>Deskripsi:</strong> ${testResults.psikotes.summary.description}</p>
+                        </div>
+                    `;
+                }
+            }
+            
+            content.innerHTML = resultsHTML;
+            modal.classList.add('active');
+        }
+
+        function showDetailedResults(testType) {
+            const modal = document.getElementById('detailed-results-modal');
+            const title = document.getElementById('detailed-results-title');
+            const content = document.getElementById('detailed-results-content');
+            
+            let resultHTML = '';
+            
+            switch(testType) {
+                case 'iq':
+                    if (!checkTestCompletion('iq')) {
+                        alert("Tes IQ belum selesai dikerjakan!");
+                        return;
+                    }
+                    calculateIQResults();
+                    const iqResult = testResults.iq;
+                    
+                    title.innerHTML = '<i class="fas fa-brain"></i> Hasil Detail Tes IQ';
+                    resultHTML = `
+                        <div style="background: #f0f7ff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div>
+                                    <h4 style="margin: 0; color: #4361ee;">Skor IQ: ${iqResult.score}</h4>
+                                    <p style="margin: 5px 0 0 0; color: #666;">${iqResult.classification.name}</p>
+                                </div>
+                                <div style="background: ${iqResult.classification.color}; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold;">
+                                    ${iqResult.classification.name}
+                                </div>
+                            </div>
+                            <p style="margin: 10px 0; color: #666;">${iqResult.classification.description}</p>
+                            <p style="margin: 0; color: #666;"><strong>${iqResult.details.correct} jawaban benar</strong> dari ${iqResult.details.total} soal (${iqResult.details.percentage}%)</p>
+                        </div>
+                        
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #4361ee; margin-bottom: 15px;"><i class="fas fa-chart-bar"></i> Distribusi Jawaban</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div>
+                                    <p style="margin: 0 0 5px 0; color: #666;">Jawaban Benar</p>
+                                    <div style="background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                                        <div style="background: #2ecc71; height: 100%; width: ${iqResult.details.percentage}%;"></div>
+                                    </div>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #666;">${iqResult.details.correct} soal</p>
+                                </div>
+                                <div>
+                                    <p style="margin: 0 0 5px 0; color: #666;">Jawaban Salah</p>
+                                    <div style="background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                                        <div style="background: #e74c3c; height: 100%; width: ${100 - iqResult.details.percentage}%;"></div>
+                                    </div>
+                                    <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #666;">${iqResult.details.total - iqResult.details.correct} soal</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'disc':
+                    if (!checkTestCompletion('disc')) {
+                        alert("Tes DISC belum selesai dikerjakan!");
+                        return;
+                    }
+                    calculateDISCResults();
+                    const discResult = testResults.disc;
+                    const discTypes = {
+                        D: { name: "Dominan", color: "#e74c3c", description: "Tegas, berorientasi hasil, kepemimpinan" },
+                        I: { name: "Pengaruh", color: "#f39c12", description: "Inspiratif, persuasif, bersosialisasi" },
+                        S: { name: "Stabil", color: "#2ecc71", description: "Sabar, konsisten, kooperatif" },
+                        C: { name: "Teliti", color: "#3498db", description: "Analitis, akurat, sistematis" }
+                    };
+                    
+                    title.innerHTML = '<i class="fas fa-users"></i> Hasil Detail Tes DISC';
+                    resultHTML = `
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div>
+                                    <h4 style="margin: 0; color: #7209b7;">Tipe Utama: ${discResult.primary} - ${discTypes[discResult.primary].name}</h4>
+                                    <p style="margin: 5px 0 0 0; color: #666;">${discTypes[discResult.primary].description}</p>
+                                </div>
+                                <div style="background: ${discTypes[discResult.primary].color}; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold;">
+                                    ${discResult.primary} - ${discTypes[discResult.primary].name}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #7209b7; margin-bottom: 15px;"><i class="fas fa-chart-pie"></i> Profil Lengkap DISC</h4>
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+                                ${Object.entries(discTypes).map(([type, info]) => `
+                                    <div style="text-align: center; padding: 15px; background: ${discResult.primary === type ? info.color + '20' : '#f8f9fa'}; border-radius: 10px; border: 2px solid ${discResult.primary === type ? info.color : 'transparent'};">
+                                        <div style="font-size: 24px; color: ${info.color}; margin-bottom: 10px;">
+                                            <i class="fas fa-user${type === 'D' ? '-tie' : type === 'I' ? '-friends' : type === 'S' ? '-check' : '-cog'}"></i>
+                                        </div>
+                                        <h5 style="margin: 0 0 5px 0; color: #333;">${type} - ${info.name}</h5>
+                                        <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">${info.description}</p>
+                                        <div style="font-size: 24px; font-weight: bold; color: ${info.color};">${discResult.scores[type] || 0}%</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'psikotes':
+                    if (!checkTestCompletion('psikotes')) {
+                        alert("Tes Psikotes belum selesai dikerjakan!");
+                        return;
+                    }
+                    calculatePsikotesResults();
+                    const psikotesResult = testResults.psikotes;
+                    
+                    title.innerHTML = '<i class="fas fa-chart-bar"></i> Hasil Detail Tes Psikotes';
+                    resultHTML = `
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div>
+                                    <h4 style="margin: 0; color: #f72585;">Gaya Kerja Utama: ${psikotesResult.summary.name}</h4>
+                                    <p style="margin: 5px 0 0 0; color: #666;">${psikotesResult.summary.description}</p>
+                                </div>
+                                <div style="background: #f72585; color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold;">
+                                    ${psikotesResult.primaryStyle.toUpperCase()}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #f72585; margin-bottom: 15px;"><i class="fas fa-chart-bar"></i> Skor Detail Gaya Kerja</h4>
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px;">
+                                ${Object.entries(psikotesResult.scores).map(([style, score]) => {
+                                    const styleNames = {
+                                        creative: { name: "Kreatif & Inovatif", color: "#f72585" },
+                                        analytical: { name: "Analitis & Strategis", color: "#4361ee" },
+                                        social: { name: "Sosial & Kolaboratif", color: "#4cc9f0" },
+                                        structured: { name: "Terstruktur & Terorganisir", color: "#7209b7" }
+                                    };
+                                    
+                                    const maxScore = 40;
+                                    const percentage = (score / maxScore) * 100;
+                                    
+                                    return `
+                                        <div>
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                                <span style="font-weight: bold; color: #333;">${styleNames[style].name}</span>
+                                                <span style="font-weight: bold; color: ${styleNames[style].color};">${score} poin</span>
+                                            </div>
+                                            <div style="background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                                                <div style="background: ${styleNames[style].color}; height: 100%; width: ${percentage}%;"></div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    resultHTML = '<p>Jenis tes tidak valid.</p>';
+            }
+            
+            content.innerHTML = resultHTML;
+            modal.classList.add('active');
+        }
+
+        // ===================== EXPORT TO PDF =====================
+        async function exportToPDF() {
+            try {
+                // Show loading state
+                const exportBtn = document.getElementById('export-pdf-btn');
+                const originalText = exportBtn.innerHTML;
+                exportBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Membuat PDF...';
+                exportBtn.disabled = true;
+                
+                // Calculate results if not already done
+                if (!testResults.iq.score) calculateAllResults();
+                if (!document.getElementById('result-name').textContent) displayResults();
+                
+                // Wait for charts to render
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Create PDF
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'pt', 'a4');
+                
+                // Add header
+                doc.setFontSize(20);
+                doc.setTextColor(67, 97, 238);
+                doc.text("HASIL TES KANDIDAT KREATIF", 40, 50);
+                
+                doc.setFontSize(12);
+                doc.setTextColor(0, 0, 0);
+                doc.text(`Tanggal: ${candidateData.testDate}`, 40, 80);
+                
+                // Add candidate info
+                doc.setFontSize(14);
+                doc.text("INFORMASI KANDIDAT", 40, 120);
+                
+                doc.setFontSize(11);
+                doc.text(`Nama: ${candidateData.name || "-"}`, 40, 150);
+                doc.text(`Email: ${candidateData.email || "-"}`, 40, 170);
+                doc.text(`Telepon: ${candidateData.phone || "-"}`, 40, 190);
+                doc.text(`Posisi: ${candidateData.position ? candidateData.position.name : "-"}`, 40, 210);
+                
+                // Add IQ results
+                doc.setFontSize(14);
+                doc.text("HASIL TES IQ", 40, 250);
+                
+                doc.setFontSize(11);
+                doc.text(`Skor: ${testResults.iq.score}`, 40, 280);
+                doc.text(`Klasifikasi: ${testResults.iq.classification.name}`, 40, 300);
+                doc.text(`Jawaban Benar: ${testResults.iq.details.correct}/30 (${testResults.iq.details.percentage}%)`, 40, 320);
+                
+                // Add DISC results
+                doc.setFontSize(14);
+                doc.text("HASIL TES DISC", 40, 360);
+                
+                doc.setFontSize(11);
+                doc.text(`Tipe Utama: ${testResults.disc.primary} - ${testResults.disc.details.fullName}`, 40, 390);
+                doc.text(`Deskripsi: ${testResults.disc.details.description}`, 40, 410);
+                
+                // Add Psikotes results
+                doc.setFontSize(14);
+                doc.text("HASIL TES PSIKOTES", 40, 450);
+                
+                doc.setFontSize(11);
+                doc.text(`Gaya Kerja: ${testResults.psikotes.summary.name}`, 40, 480);
+                doc.text(`Deskripsi: ${testResults.psikotes.summary.description}`, 40, 500);
+                
+                // Add recommendations if available
+                const strengthsList = document.getElementById('strengths-list');
+                if (strengthsList && strengthsList.innerHTML) {
+                    doc.setFontSize(14);
+                    doc.text("REKOMENDASI", 40, 540);
+                    
+                    doc.setFontSize(11);
+                    let yPos = 570;
+                    
+                    // Add strengths
+                    doc.text("Kekuatan Utama:", 40, yPos);
+                    yPos += 20;
+                    
+                    const strengthsItems = strengthsList.querySelectorAll('li');
+                    strengthsItems.forEach(item => {
+                        if (yPos > 750) {
+                            doc.addPage();
+                            yPos = 40;
+                        }
+                        doc.text(`• ${item.textContent}`, 50, yPos);
+                        yPos += 20;
+                    });
+                }
+                
+                // Add footer
+                doc.setFontSize(10);
+                doc.setTextColor(128, 128, 128);
+                doc.text("© 2023 Portal Tes Kandidat Kreatif - Hasil ini bersifat rahasia dan hanya untuk keperluan assessment", 40, 800);
+                
+                // Save PDF
+                const fileName = `Hasil_Tes_${candidateData.name || 'Kandidat'}_${new Date().toISOString().split('T')[0]}.pdf`;
+                doc.save(fileName);
+                
+                // Restore button state
+                exportBtn.innerHTML = originalText;
+                exportBtn.disabled = false;
+                
+                alert("PDF berhasil diunduh!");
+                
+            } catch (error) {
+                console.error("Error generating PDF:", error);
+                alert("Terjadi kesalahan saat membuat PDF. Silakan coba lagi.");
+                
+                // Restore button state
+                const exportBtn = document.getElementById('export-pdf-btn');
+                exportBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Simpan sebagai PDF';
+                exportBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
